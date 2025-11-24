@@ -36,6 +36,6 @@ public class FileReader {
   }
 
   private static Path getPath(String fileName) {
-    return Paths.get("src/main/resources/" + fileName);
+    return Paths.get("src/main/resources/2023/" + fileName);
   }
 }
