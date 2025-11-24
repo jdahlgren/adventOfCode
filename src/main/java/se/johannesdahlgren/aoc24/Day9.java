@@ -32,7 +32,7 @@ public class Day9 {
   }
 
   private String readInputFile() throws IOException {
-    return Files.readString(Path.of("src/main/resources/day9"));
+    return Files.readString(Path.of("src/main/resources/2024/day9"));
   }
 
   private List<Integer> parseInput(String input) {

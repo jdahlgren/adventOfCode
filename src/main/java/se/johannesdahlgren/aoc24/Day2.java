@@ -11,7 +11,7 @@ public class Day2 {
 
   public static void main(String[] args) {
     try {
-      String filePath = "src/main/resources/day2";
+      String filePath = "src/main/resources/2024/day2";
       int validLinesPart1 = countValidLinesPart1(filePath);
       int validLinesPart2 = countValidLinesPart2(filePath);
       System.out.println("Total valid lines: " + validLinesPart1);

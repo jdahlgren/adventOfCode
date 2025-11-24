@@ -111,7 +111,7 @@ public class Day10 {
   }
 
   public static void main(String[] args) throws IOException {
-    Day10 solver = new Day10("src/main/resources/day10");
+    Day10 solver = new Day10("src/main/resources/2024/day10");
     Result result = solver.solve();
 
     int totalReachableNines = result.reachableNinesCount.stream()

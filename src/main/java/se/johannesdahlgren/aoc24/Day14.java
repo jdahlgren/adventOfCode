@@ -35,7 +35,7 @@ public class Day14 {
     final int ROOM_HEIGHT = 103;
     final int MAX_SECONDS = 10000; // Increased to 10000 seconds
 
-    List<Robot> robots = readRobots("src/main/resources/day14");
+    List<Robot> robots = readRobots("src/main/resources/2024/day14");
     List<Robot> robotsAt100 = null; // Store state at 100 seconds for part 1
 
     for (int second = 1; second <= MAX_SECONDS; second++) {

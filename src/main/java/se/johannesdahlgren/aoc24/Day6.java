@@ -36,14 +36,14 @@ public class Day6 {
   private record State(Position position, Direction direction) {}
 
   public int part1() throws IOException {
-    List<String> lines = Files.readAllLines(Path.of("src/main/resources/day6"));
+    List<String> lines = Files.readAllLines(Path.of("src/main/resources/2024/day6"));
     char[][] map = createMap(lines);
     Position startPos = findStartPosition(map);
     return simulateGuard(map, startPos).visitedPositions().size();
   }
 
   public int part2() throws IOException {
-    List<String> lines = Files.readAllLines(Path.of("src/main/resources/day6"));
+    List<String> lines = Files.readAllLines(Path.of("src/main/resources/2024/day6"));
     char[][] originalMap = createMap(lines);
     Position startPos = findStartPosition(originalMap);
     int loopCount = 0;

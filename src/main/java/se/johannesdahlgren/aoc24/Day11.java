@@ -19,7 +19,7 @@ public class Day11 {
   }
 
   private static void processInput(int turns) throws Exception {
-    String input = Files.readString(Path.of("src/main/resources/day11"));
+    String input = Files.readString(Path.of("src/main/resources/2024/day11"));
     Map<BigInteger, Long> numberCounts = new HashMap<>();
 
     // Parse initial space-separated numbers

@@ -13,7 +13,7 @@ public record Day4(char[][] matrix) {
 
   private static char[][] loadMatrix() {
     try {
-      List<String> lines = Files.readAllLines(Paths.get("src/main/resources/day4"));
+      List<String> lines = Files.readAllLines(Paths.get("src/main/resources/2024/day4"));
 
       if (lines.isEmpty()) {
         throw new IOException("Input file is empty");

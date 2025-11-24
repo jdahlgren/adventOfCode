@@ -57,7 +57,7 @@ public class Day3 {
   public static void main(String[] args) {
     try {
       // Read input from file
-      String input = Files.readString(Path.of("src/main/resources/day3"));
+      String input = Files.readString(Path.of("src/main/resources/2024/day3"));
 
       System.out.println("Part 1 sum: " + findAndSumMultiplications(input));
       System.out.println("Part 2 sum: " + findAndSumMultiplicationsWithReset(input));

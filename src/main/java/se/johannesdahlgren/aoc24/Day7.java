@@ -20,7 +20,7 @@ public class Day7 {
   public long sumValidTestNumbers(boolean includeConcatenation) {
     long sum = 0;
     try {
-      List<String> lines = Files.readAllLines(Path.of("src/main/resources/day7"));
+      List<String> lines = Files.readAllLines(Path.of("src/main/resources/2024/day7"));
 
       for (String line : lines) {
         String[] parts = line.split(":");

@@ -21,7 +21,7 @@ public class Day8 {
   }
 
   public Day8() throws IOException {
-    List<String> lines = Files.readAllLines(Path.of("src/main/resources/day8"));
+    List<String> lines = Files.readAllLines(Path.of("src/main/resources/2024/day8"));
     this.rows = lines.size();
     this.cols = lines.get(0).length();
     this.map = new char[rows][cols];

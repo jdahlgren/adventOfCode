@@ -31,7 +31,7 @@ public class Day12 {
 
   private void readInput() {
     try {
-      Files.readAllLines(Path.of("src/main/resources/day12")).forEach(line -> {
+      Files.readAllLines(Path.of("src/main/resources/2024/day12")).forEach(line -> {
         grid.add(line.chars()
             .mapToObj(ch -> (char) ch)
             .toList());

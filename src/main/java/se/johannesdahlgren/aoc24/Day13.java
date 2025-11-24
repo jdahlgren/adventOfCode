@@ -112,7 +112,7 @@ public class Day13 {
   }
 
   public static void main(String[] args) throws IOException {
-    String input = Files.readString(Path.of("src/main/resources/day13"));
+    String input = Files.readString(Path.of("src/main/resources/2024/day13"));
     String[] machines = input.split("\n\\s*\n");
 
     int totalTokens = 0;

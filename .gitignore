@@ -27,5 +27,6 @@ replay_pid*
 target
 
 # full input files from aoc
-src/main/resources/*
-!src/main/resources/*.example
+src/main/resources/**
+!src/main/resources/*/
+!src/main/resources/**/*.example

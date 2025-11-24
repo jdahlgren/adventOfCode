@@ -104,7 +104,7 @@ public class Day5 {
 
   public static void main(String[] args) throws IOException {
     Day5 validator = new Day5();
-    validator.loadFromFile("src/main/resources/day5");
+    validator.loadFromFile("src/main/resources/2024/day5");
 
     // Part 1: Original sum of valid lists
     int originalSum = validator.sumMiddleNumbersOfValidLists();

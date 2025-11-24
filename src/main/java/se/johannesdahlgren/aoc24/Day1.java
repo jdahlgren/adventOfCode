@@ -16,7 +16,7 @@ public class Day1 {
   private static final Logger log = LoggerFactory.getLogger(Day1.class);
 
   public static void main(String[] args) throws IOException {
-    List<Pair> pairs = readPairsFromFile("src/main/resources/day1");
+    List<Pair> pairs = readPairsFromFile("src/main/resources/2024/day1");
     int result = calculateColumnDistanceSum(pairs);
     log.info("Sum of column distances: {}", result);
 
