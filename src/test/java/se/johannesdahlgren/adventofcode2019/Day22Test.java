@@ -11,7 +11,7 @@ class Day22Test {
 
   @Test
   void example1() {
-    Day22 day22 = new Day22("day22/day22_example1");
+    Day22 day22 = new Day22("day22_example1");
     Deck deck = new Deck(10);
     day22.shuffle(deck);
     assertThat(deck.getCards(), Matchers.containsInRelativeOrder(0, 3, 6, 9, 2, 5, 8, 1, 4, 7));
@@ -19,7 +19,7 @@ class Day22Test {
 
   @Test
   void example2() {
-    Day22 day22 = new Day22("day22/day22_example2");
+    Day22 day22 = new Day22("day22_example2");
     Deck deck = new Deck(10);
     day22.shuffle(deck);
     assertThat(deck.getCards(), Matchers.containsInRelativeOrder(3, 0, 7, 4, 1, 8, 5, 2, 9, 6));
@@ -27,7 +27,7 @@ class Day22Test {
 
   @Test
   void example3() {
-    Day22 day22 = new Day22("day22/day22_example3");
+    Day22 day22 = new Day22("day22_example3");
     Deck deck = new Deck(10);
     day22.shuffle(deck);
     assertThat(deck.getCards(), Matchers.containsInRelativeOrder(6, 3, 0, 7, 4, 1, 8, 5, 2, 9));
@@ -35,7 +35,7 @@ class Day22Test {
 
   @Test
   void example4() {
-    Day22 day22 = new Day22("day22/day22_example4");
+    Day22 day22 = new Day22("day22_example4");
     Deck deck = new Deck(10);
     day22.shuffle(deck);
     assertThat(deck.getCards(), Matchers.containsInRelativeOrder(9, 2, 5, 8, 1, 4, 7, 0, 3, 6));
@@ -43,7 +43,7 @@ class Day22Test {
 
   @Test
   void shuffle() {
-    Day22 day22 = new Day22("day22/day22");
+    Day22 day22 = new Day22("day22");
     Deck deck = new Deck(10007);
     day22.shuffle(deck);
     int index = deck.getCards().indexOf(2019);

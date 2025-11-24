@@ -11,7 +11,7 @@ class Day5Test {
 
   @Test
   void part1() {
-    day5 = new Day5("day5/day5.txt", 1);
+    day5 = new Day5("day5.txt", 1);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(10987514));
   }
@@ -19,7 +19,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample1() {
     int input = 9;
-    day5 = new Day5("day5/day5_example1.txt", input);
+    day5 = new Day5("day5_example1.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(input));
   }
@@ -27,7 +27,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample2EqualsEight() {
     int input = 8;
-    day5 = new Day5("day5/day5_example2.txt", input);
+    day5 = new Day5("day5_example2.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(1));
   }
@@ -35,7 +35,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample2NotEqualsEight() {
     int input = 9;
-    day5 = new Day5("day5/day5_example2.txt", input);
+    day5 = new Day5("day5_example2.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(0));
   }
@@ -43,7 +43,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample3LTEight() {
     int input = 2;
-    day5 = new Day5("day5/day5_example3.txt", input);
+    day5 = new Day5("day5_example3.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(1));
   }
@@ -51,7 +51,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample3NotLTEight() {
     int input = 9;
-    day5 = new Day5("day5/day5_example3.txt", input);
+    day5 = new Day5("day5_example3.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(0));
   }
@@ -59,7 +59,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample4EqualsEight() {
     int input = 8;
-    day5 = new Day5("day5/day5_example4.txt", input);
+    day5 = new Day5("day5_example4.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(1));
   }
@@ -67,7 +67,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample4NotEqualsEight() {
     int input = 9;
-    day5 = new Day5("day5/day5_example4.txt", input);
+    day5 = new Day5("day5_example4.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(0));
   }
@@ -75,7 +75,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample5LTEight() {
     int input = 2;
-    day5 = new Day5("day5/day5_example5.txt", input);
+    day5 = new Day5("day5_example5.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(1));
   }
@@ -83,7 +83,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample5NotLTEight() {
     int input = 9;
-    day5 = new Day5("day5/day5_example5.txt", input);
+    day5 = new Day5("day5_example5.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(0));
   }
@@ -91,7 +91,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample6ZeroInput() {
     int input = 0;
-    day5 = new Day5("day5/day5_example6.txt", input);
+    day5 = new Day5("day5_example6.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(0));
   }
@@ -99,7 +99,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample6NonZeroInput() {
     int input = 2;
-    day5 = new Day5("day5/day5_example6.txt", input);
+    day5 = new Day5("day5_example6.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(1));
   }
@@ -107,7 +107,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample7ZeroInput() {
     int input = 0;
-    day5 = new Day5("day5/day5_example7.txt", input);
+    day5 = new Day5("day5_example7.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(0));
   }
@@ -115,7 +115,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample7NonZeroInput() {
     int input = 9;
-    day5 = new Day5("day5/day5_example7.txt", input);
+    day5 = new Day5("day5_example7.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(1));
   }
@@ -123,7 +123,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample8LTEight() {
     int input = 7;
-    day5 = new Day5("day5/day5_example8.txt", input);
+    day5 = new Day5("day5_example8.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(999));
   }
@@ -131,7 +131,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample8EqEight() {
     int input = 8;
-    day5 = new Day5("day5/day5_example8.txt", input);
+    day5 = new Day5("day5_example8.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(1000));
   }
@@ -139,7 +139,7 @@ class Day5Test {
   @Test
   void runDiagnosticCodeExample8GTEight() {
     int input = 9;
-    day5 = new Day5("day5/day5_example8.txt", input);
+    day5 = new Day5("day5_example8.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(1001));
   }
@@ -147,7 +147,7 @@ class Day5Test {
   @Test
   void part2() {
     int input = 5;
-    day5 = new Day5("day5/day5.txt", input);
+    day5 = new Day5("day5.txt", input);
     int integers = day5.runDiagnosticCode();
     assertThat(integers, is(14195011));
   }

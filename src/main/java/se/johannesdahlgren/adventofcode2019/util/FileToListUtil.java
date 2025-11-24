@@ -26,7 +26,7 @@ public class FileToListUtil {
 
   private static <T> List<T> getListFromFile(String filePath, CheckedFunction<URI, List<T>> function) {
     try {
-      URL fileUrl = FileToListUtil.class.getClassLoader().getResource(filePath);
+      URL fileUrl = FileToListUtil.class.getClassLoader().getResource("2019/" + filePath);
       if (fileUrl == null) {
         throw new RuntimeException("Could not find file: " + filePath);
       }
