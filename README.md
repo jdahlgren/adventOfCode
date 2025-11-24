@@ -1,4 +1,11 @@
-# adventofcode2024
+# Advent of Code
+Collection of my solutions to Advent of Code
+Year 2019-2024 is merged into this repo from its respective repos, which are now archived.
+
+## 2025
+Back to my own solutions. No LLMs this year.
+
+## 2024
 This year, I'm learning LLMs, and will use them to solve the daily tasks.
 I won't copy/paste full problems into LLM, but trying to learn how to best write good prompts
 
