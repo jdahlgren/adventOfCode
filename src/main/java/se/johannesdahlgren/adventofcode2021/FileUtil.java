@@ -83,6 +83,6 @@ public class FileUtil {
   }
 
   private static Path getPath(String inputFile) {
-    return Paths.get("src/main/resources/" + inputFile);
+    return Paths.get("src/main/resources/2021/" + inputFile);
   }
 }

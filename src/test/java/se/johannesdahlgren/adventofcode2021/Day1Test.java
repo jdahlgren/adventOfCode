@@ -10,7 +10,7 @@ class Day1Test {
   @Test
   void day1Part1Example() {
     Day1 day1 = new Day1();
-    var result = day1.calculateNumberOfDepthIncreases("day1example");
+    var result = day1.calculateNumberOfDepthIncreases("day1example.txt");
     assertThat(result, is(7));
   }
 
@@ -24,7 +24,7 @@ class Day1Test {
   @Test
   void day1Part2Example() {
     Day1 day1 = new Day1();
-    var result = day1.calculateNumberOfDepthIncreasesSlidingWindow3("day1example");
+    var result = day1.calculateNumberOfDepthIncreasesSlidingWindow3("day1example.txt");
     assertThat(result, is(5));
   }
 
