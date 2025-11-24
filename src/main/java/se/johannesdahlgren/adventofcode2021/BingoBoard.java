@@ -2,9 +2,7 @@ package se.johannesdahlgren.adventofcode2021;
 
 import java.util.Collection;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public final class BingoBoard {
 
   private final List<List<BingoNumber>> bingoNumberGrid;
@@ -50,5 +48,13 @@ public final class BingoBoard {
       }
     }
     return false;
+  }
+
+  public List<List<BingoNumber>> getBingoNumberGrid() {
+    return bingoNumberGrid;
+  }
+
+  public int getCallingNumberWhenBingo() {
+    return callingNumberWhenBingo;
   }
 }

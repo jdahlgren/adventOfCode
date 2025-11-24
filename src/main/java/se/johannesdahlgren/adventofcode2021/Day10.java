@@ -3,7 +3,6 @@ package se.johannesdahlgren.adventofcode2021;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import lombok.Getter;
 
 public class Day10 {
 
@@ -107,7 +106,6 @@ public class Day10 {
     return 0;
   }
 
-  @Getter
   private enum Chunk {
     PARENTHESES(CHUNK_PARENTHESES_OPEN, CHUNK_PARENTHESES_CLOSE, CHUNK_PARENTHESES_ERROR_SCORE, CHUNK_PARENTHESES_AUTOCOMPLETE_SCORE),
     BRACKETS(CHUNK_BRACKETS_OPEN, CHUNK_BRACKETS_CLOSE, CHUNK_BRACKETS_ERROR_SCORE, CHUNK_BRACKETS_AUTOCOMPLETE_SCORE),
@@ -150,6 +148,18 @@ public class Day10 {
         return DIAMOND;
       }
       throw new IllegalArgumentException("Not a valid open char");
+    }
+
+    public long getAutoCompleteScore() {
+      return autoCompleteScore;
+    }
+
+    public Character getClose() {
+      return close;
+    }
+
+    public long getErrorScore() {
+      return errorScore;
     }
   }
 }

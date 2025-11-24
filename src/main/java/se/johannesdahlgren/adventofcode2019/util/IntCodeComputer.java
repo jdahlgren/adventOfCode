@@ -3,9 +3,9 @@ package se.johannesdahlgren.adventofcode2019.util;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 public class IntCodeComputer {
 
   private static final int OP_CODE_ADD = 1;
@@ -23,6 +23,7 @@ public class IntCodeComputer {
 
   private static final int NOUN_POSITION = 1;
   private static final int VERB_POSITION = 2;
+  private static final Logger log = LoggerFactory.getLogger(IntCodeComputer.class);
 
   private final List<Integer> defaultIntCode;
   private List<Integer> currentIntCode;

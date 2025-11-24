@@ -64,13 +64,13 @@ public class Day3 {
   private Point getNewPointInDirection(String direction, Point lastPoint) {
     switch (direction) {
       case UP:
-        return new Point(lastPoint.getX(), lastPoint.getY() + 1);
+        return new Point(lastPoint.x(), lastPoint.y() + 1);
       case RIGHT:
-        return new Point(lastPoint.getX() + 1, lastPoint.getY());
+        return new Point(lastPoint.x() + 1, lastPoint.y());
       case DOWN:
-        return new Point(lastPoint.getX(), lastPoint.getY() - 1);
+        return new Point(lastPoint.x(), lastPoint.y() - 1);
       case LEFT:
-        return new Point(lastPoint.getX() - 1, lastPoint.getY());
+        return new Point(lastPoint.x() - 1, lastPoint.y());
     }
     throw new RuntimeException("Unknown direction");
   }
@@ -112,6 +112,6 @@ public class Day3 {
   }
 
   private int calculateManhattanDistance(Point point) {
-    return Math.abs(point.getX()) + Math.abs(point.getY());
+    return Math.abs(point.x()) + Math.abs(point.y());
   }
 }

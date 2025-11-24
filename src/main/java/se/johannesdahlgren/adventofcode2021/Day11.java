@@ -3,9 +3,6 @@ package se.johannesdahlgren.adventofcode2021;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 public class Day11 {
 
@@ -103,15 +100,19 @@ public class Day11 {
   }
 
 
-  @AllArgsConstructor
-  @Getter
-  @EqualsAndHashCode
   private static final class Octopus {
 
     private final int x;
     private final int y;
     private int energy;
     private boolean hasFlashed;
+
+    private Octopus(int x, int y, int energy, boolean hasFlashed) {
+      this.x = x;
+      this.y = y;
+      this.energy = energy;
+      this.hasFlashed = hasFlashed;
+    }
 
     public boolean willFlash() {
       return energy > 9;
@@ -120,6 +121,20 @@ public class Day11 {
     public void reset() {
       energy = 0;
       hasFlashed = false;
+    }
+
+    public boolean isHasFlashed() {
+      return hasFlashed;
+    }
+
+    public int getY() {
+      return y;
+    }
+    public int getX() {
+      return x;
+    }
+    public int getEnergy() {
+      return energy;
     }
   }
 }

@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 public class Day21 {
 
@@ -39,12 +37,19 @@ public class Day21 {
     return (long) minScore * totalRolls;
   }
 
-  @AllArgsConstructor
-  @Getter
   static final class Player {
 
     private int score;
     private int pos;
+
+    Player(int score, int pos) {
+      this.score = score;
+      this.pos = pos;
+    }
+
+    public int getScore() {
+      return score;
+    }
   }
 
   static final class DeterministicDice {

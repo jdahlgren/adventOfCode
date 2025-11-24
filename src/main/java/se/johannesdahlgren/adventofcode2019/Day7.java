@@ -2,14 +2,15 @@ package se.johannesdahlgren.adventofcode2019;
 
 import java.util.Arrays;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import se.johannesdahlgren.adventofcode2019.util.FileToListUtil;
 import se.johannesdahlgren.adventofcode2019.util.IntCodeComputer;
 import se.johannesdahlgren.adventofcode2019.util.PermutePhaseSettings;
 
-@Slf4j
 public class Day7 {
 
+  private static final Logger log = LoggerFactory.getLogger(Day7.class);
   private final List<Integer> intCode;
 
   public Day7(String filePath) {
