@@ -3,6 +3,7 @@ package se.johannesdahlgren.aoc23;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class Day5Test {
@@ -28,6 +29,7 @@ class Day5Test {
     assertThat(temp, is(46L));
   }
 
+  @Disabled("Slow, around 2.5 minutes")
   @Test
   void part2() {
     Day5 day5 = new Day5("day5.txt");

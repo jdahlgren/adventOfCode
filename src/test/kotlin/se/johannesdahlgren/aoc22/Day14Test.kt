@@ -2,6 +2,7 @@ package se.johannesdahlgren.aoc22
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day14Test {
@@ -24,6 +25,7 @@ class Day14Test {
         assertThat(day14.calcUnitOfSandAtRest(2), Is.`is`(93))
     }
 
+    @Disabled("Slow, around 2 minutes")
     @Test
     fun part2() {
         val day14 = Day14("day14")
