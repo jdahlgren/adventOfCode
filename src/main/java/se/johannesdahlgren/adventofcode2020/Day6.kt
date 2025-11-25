@@ -5,7 +5,7 @@ class Day6 {
         val answersFromGroups = readFileToStringListSplitEmptyLine(fileName)
         return answersFromGroups
             .asSequence()
-            .map { it.replace("\r\n", "") }
+            .map { it.replace("\n", "") }
             .map { it.toCharArray() }
             .map { it.distinct() }
             .map { it.count() }
@@ -17,7 +17,7 @@ class Day6 {
         var count = 0
         for (answersFromGroup in answersFromGroups) {
             val answersFromPersonsInGroup = answersFromGroup.trim()
-                .split(Regex("\r\n", RegexOption.MULTILINE))
+                .split(Regex("\n", RegexOption.MULTILINE))
             var mutableSetOf = answersFromPersonsInGroup[0].toCharArray().toSet()
             for (answersFromPerson in answersFromPersonsInGroup) {
                 mutableSetOf = answersFromPerson.toCharArray().intersect(mutableSetOf)
