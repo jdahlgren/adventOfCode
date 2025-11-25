@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import se.johannesdahlgren.aoc24.util.Pair;
+import se.johannesdahlgren.util.Pair;
 
 public class Day1 {
 

@@ -13,7 +13,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import se.johannesdahlgren.aoc24.util.Pair;
+import se.johannesdahlgren.util.Pair;
 
 class Day1Test {
 

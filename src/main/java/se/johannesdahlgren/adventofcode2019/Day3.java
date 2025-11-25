@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import se.johannesdahlgren.adventofcode2019.util.FileToListUtil;
-import se.johannesdahlgren.adventofcode2019.util.Point;
+import se.johannesdahlgren.util.Point;
 
 public class Day3 {
 
