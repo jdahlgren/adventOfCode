@@ -1,7 +1,5 @@
 package se.johannesdahlgren.adventofcode2020
 
-import kotlin.streams.toList
-
 class Day5 {
 
     fun findSeatId(boardingPass: String): Int {
