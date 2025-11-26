@@ -1,41 +1,27 @@
 package se.johannesdahlgren.aoc23.util;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
+import se.johannesdahlgren.util.FileUtil;
 
 public class FileReader {
 
   public static List<String> readFileAsLines(String fileName) {
     Path path = getPath(fileName);
-    try {
-      return Files.readAllLines(path);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    return FileUtil.toLines(path);
   }
 
   public static List<List<Character>> readFileAsCharMatrix(String fileName) {
-    return readFileAsLines(fileName).stream()
-        .map(line -> line.chars()
-            .mapToObj(c -> (char) c)
-            .toList())
-        .toList();
-
+    Path path = getPath(fileName);
+    return FileUtil.toChar2DList(path);
   }
 
   public static String readFileToString(String fileName) {
     Path path = getPath(fileName);
-    try {
-      return Files.readString(path);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    return FileUtil.toString(path);
   }
 
   private static Path getPath(String fileName) {
-    return Paths.get("src/main/resources/2023/" + fileName);
+    return FileUtil.getPath("2023", fileName);
   }
 }

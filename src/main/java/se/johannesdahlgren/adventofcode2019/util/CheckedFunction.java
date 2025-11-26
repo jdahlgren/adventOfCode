@@ -1,9 +1,7 @@
 package se.johannesdahlgren.adventofcode2019.util;
 
-import java.io.IOException;
-
 @FunctionalInterface
 public interface CheckedFunction<T, R> {
 
-  R apply(T t) throws IOException;
+  R apply(T t);
 }
