@@ -14,19 +14,19 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import se.johannesdahlgren.util.Pair;
+import se.johannesdahlgren.util.IntPair;
 
 class Day1Test {
 
   @Test
   void testCalculateDistances() {
-    List<Pair> pairs = List.of(
-        new Pair(3, 4),
-        new Pair(4, 3),
-        new Pair(2, 5),
-        new Pair(1, 3),
-        new Pair(3, 9),
-        new Pair(3, 3)
+    List<IntPair> pairs = List.of(
+        new IntPair(3, 4),
+        new IntPair(4, 3),
+        new IntPair(2, 5),
+        new IntPair(1, 3),
+        new IntPair(3, 9),
+        new IntPair(3, 3)
     );
 
     int result = new Day1().calculateColumnDistanceSum(pairs);
@@ -38,16 +38,16 @@ class Day1Test {
     Path inputFile = tempDir.resolve("test_input.txt");
     Files.writeString(inputFile, "3 4\n4 3\n2 5\n1 3\n3 9\n3 3");
 
-    List<Pair> pairs = new Day1().readPairsFromFile(inputFile.toString());
+    List<IntPair> pairs = new Day1().readPairsFromFile(inputFile.toString());
 
     assertEquals(6, pairs.size(), "Should read 6 pairs from the file");
-    assertEquals(new Pair(3, 4), pairs.get(0), "First pair should be (3, 4)");
-    assertEquals(new Pair(3, 3), pairs.get(5), "Last pair should be (3, 3)");
+    assertEquals(new IntPair(3, 4), pairs.get(0), "First pair should be (3, 4)");
+    assertEquals(new IntPair(3, 3), pairs.get(5), "Last pair should be (3, 3)");
   }
 
   @Test
   void testCalculateDistancesWithEmptyList() {
-    List<Pair> pairs = new ArrayList<>();
+    List<IntPair> pairs = new ArrayList<>();
 
     int result = new Day1().calculateColumnDistanceSum(pairs);
     assertEquals(0, result, "The sum of column distances for an empty list should be 0");
@@ -59,17 +59,17 @@ class Day1Test {
         -> new Day1().readPairsFromFile("non_existent_file.txt"), "Should throw IOException for non-existent file");
   }
 
-  private List<Pair> testPairs;
+  private List<IntPair> testPairs;
 
   @BeforeEach
   void setUp() {
     testPairs = List.of(
-        new Pair(3, 4),
-        new Pair(4, 3),
-        new Pair(2, 5),
-        new Pair(1, 3),
-        new Pair(3, 9),
-        new Pair(3, 3)
+        new IntPair(3, 4),
+        new IntPair(4, 3),
+        new IntPair(2, 5),
+        new IntPair(1, 3),
+        new IntPair(3, 9),
+        new IntPair(3, 3)
     );
   }
 
@@ -100,7 +100,7 @@ class Day1Test {
 
   @Test
   void testWithEmptyList() {
-    List<Pair> emptyList = List.of();
+    List<IntPair> emptyList = List.of();
 
     Map<Integer, Long> occurrences = new Day1().countOccurrencesInSecondColumn(emptyList);
     assertTrue(occurrences.isEmpty(), "Occurrences map should be empty for an empty list");

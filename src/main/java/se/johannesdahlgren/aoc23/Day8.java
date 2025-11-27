@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import se.johannesdahlgren.aoc23.util.FileReader;
+import se.johannesdahlgren.util.StringPair;
 
 public class Day8 {
 
@@ -16,10 +17,10 @@ public class Day8 {
 
   public int numberOfStepsToEnd() {
     List<String> input = FileReader.readFileAsLines(fileName);
-    char[] rlInstructions = input.get(0).toCharArray();
-    Map<String, RLMap> rlMaps = input.stream()
+    char[] rlInstructions = input.getFirst().toCharArray();
+    Map<String, StringPair> rlMaps = input.stream()
         .skip(2)
-        .collect(Collectors.toMap(line -> line.substring(0, 3), line -> new RLMap(line.substring(7, 10), line.substring(12, 15))));
+        .collect(Collectors.toMap(line -> line.substring(0, 3), line -> new StringPair(line.substring(7, 10), line.substring(12, 15))));
 
     String END_LOCATION = "ZZZ";
     String currentLocation = "AAA";
@@ -27,16 +28,12 @@ public class Day8 {
     while (!currentLocation.equals(END_LOCATION)) {
       int rlIndex = numberOfSteps % rlInstructions.length;
       if (rlInstructions[rlIndex] == 'R') {
-        currentLocation = rlMaps.get(currentLocation).r;
+        currentLocation = rlMaps.get(currentLocation).right();
       } else {
-        currentLocation = rlMaps.get(currentLocation).l;
+        currentLocation = rlMaps.get(currentLocation).left();
       }
       numberOfSteps++;
     }
     return numberOfSteps;
-  }
-
-  private record RLMap(String l, String r) {
-
   }
 }

@@ -7,12 +7,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import se.johannesdahlgren.util.IntPair;
 
 public class Day5 {
-  private final List<Rule> rules = new ArrayList<>();
+  private final List<IntPair> rules = new ArrayList<>();
   private final List<List<Integer>> numberLists = new ArrayList<>();
-
-  public record Rule(int before, int after) {}
 
   public void loadFromFile(String filePath) throws IOException {
     Path path = Paths.get(filePath);
@@ -27,7 +26,7 @@ public class Day5 {
 
       if (isParsingRules) {
         String[] parts = line.split("\\|");
-        rules.add(new Rule(
+        rules.add(new IntPair(
             Integer.parseInt(parts[0].trim()),
             Integer.parseInt(parts[1].trim())
         ));
@@ -56,9 +55,9 @@ public class Day5 {
 
     while (needsFixing) {
       needsFixing = false;
-      for (Rule rule : rules) {
-        int beforeIndex = mutableNumbers.indexOf(rule.before());
-        int afterIndex = mutableNumbers.indexOf(rule.after());
+      for (IntPair rule : rules) {
+        int beforeIndex = mutableNumbers.indexOf(rule.left());
+        int afterIndex = mutableNumbers.indexOf(rule.right());
 
         if (beforeIndex != -1 && afterIndex != -1 && beforeIndex > afterIndex) {
           // Swap the numbers to fix the order
@@ -89,9 +88,9 @@ public class Day5 {
     return rules.stream().allMatch(rule -> isValidRule(numbers, rule));
   }
 
-  private boolean isValidRule(List<Integer> numbers, Rule rule) {
-    int beforeIndex = numbers.indexOf(rule.before());
-    int afterIndex = numbers.indexOf(rule.after());
+  private boolean isValidRule(List<Integer> numbers, IntPair rule) {
+    int beforeIndex = numbers.indexOf(rule.left());
+    int afterIndex = numbers.indexOf(rule.right());
 
     // If either number is not in the list, the rule doesn't apply
     if (beforeIndex == -1 || afterIndex == -1) {

@@ -3,13 +3,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import se.johannesdahlgren.util.Point;
 
 public class Day12 {
   private List<List<Character>> grid = new ArrayList<>();
   private Set<Point> visited = new HashSet<>();
   private List<Plot> plots = new ArrayList<>();
-
-  record Point(int row, int col) {}
 
   record Plot(Set<Point> points, char letter, int area, int perimeter) {}
 
@@ -65,10 +64,10 @@ public class Day12 {
     for (Point point : plot) {
       // Check all four sides of the current point
       Point[] neighbors = {
-          new Point(point.row() + 1, point.col()), // down
-          new Point(point.row() - 1, point.col()), // up
-          new Point(point.row(), point.col() + 1), // right
-          new Point(point.row(), point.col() - 1)  // left
+          new Point(point.x() + 1, point.y()), // down
+          new Point(point.x() - 1, point.y()), // up
+          new Point(point.x(), point.y() + 1), // right
+          new Point(point.x(), point.y() - 1)  // left
       };
 
       for (Point neighbor : neighbors) {
@@ -84,8 +83,8 @@ public class Day12 {
   }
 
   private boolean isOutsideGrid(Point point) {
-    return point.row() < 0 || point.row() >= grid.size() ||
-        point.col() < 0 || point.col() >= grid.get(0).size();
+    return point.x() < 0 || point.x() >= grid.size() ||
+        point.y() < 0 || point.y() >= grid.get(0).size();
   }
 
   private void dfs(int row, int col, char letter, Set<Point> currentPlot) {
@@ -113,10 +112,10 @@ public class Day12 {
       System.out.printf("Perimeter: %d%n", plot.perimeter());
 
       // Find boundaries of the plot
-      int minRow = plot.points().stream().mapToInt(Point::row).min().getAsInt();
-      int maxRow = plot.points().stream().mapToInt(Point::row).max().getAsInt();
-      int minCol = plot.points().stream().mapToInt(Point::col).min().getAsInt();
-      int maxCol = plot.points().stream().mapToInt(Point::col).max().getAsInt();
+      int minRow = plot.points().stream().mapToInt(Point::x).min().getAsInt();
+      int maxRow = plot.points().stream().mapToInt(Point::x).max().getAsInt();
+      int minCol = plot.points().stream().mapToInt(Point::y).min().getAsInt();
+      int maxCol = plot.points().stream().mapToInt(Point::y).max().getAsInt();
 
       // Print the plot
       for (int r = minRow; r <= maxRow; r++) {

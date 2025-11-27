@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import se.johannesdahlgren.util.Point;
 
 public class Day8 {
   private final char[][] map;
@@ -15,7 +16,7 @@ public class Day8 {
   public Day8() throws IOException {
     List<String> lines = Files.readAllLines(Path.of("src/main/resources/2024/day8"));
     this.rows = lines.size();
-    this.cols = lines.get(0).length();
+    this.cols = lines.getFirst().length();
     this.map = new char[rows][cols];
 
     for (int i = 0; i < rows; i++) {
@@ -42,13 +43,13 @@ public class Day8 {
           Point p2 = sameNodes.get(j);
 
           // Calculate direction vector between points
-          int dx = p2.x - p1.x;
-          int dy = p2.y - p1.y;
+          int dx = p2.x() - p1.x();
+          int dy = p2.y() - p1.y();
 
           if (onlyDouble) {
             // Original behavior - only double distance
-            checkAndAddAntinode(p1.x - dx, p1.y - dy, antinodes);
-            checkAndAddAntinode(p2.x + dx, p2.y + dy, antinodes);
+            checkAndAddAntinode(p1.x() - dx, p1.y() - dy, antinodes);
+            checkAndAddAntinode(p2.x() + dx, p2.y() + dy, antinodes);
           } else {
             // Check all positions using this vector
             int gcd = gcd(Math.abs(dx), Math.abs(dy));
@@ -56,8 +57,8 @@ public class Day8 {
             int unitDy = dy / gcd;
 
             // Check positions before p1
-            int x = p1.x;
-            int y = p1.y;
+            int x = p1.x();
+            int y = p1.y();
             checkAndAddAntinode(x, y, allPossibleAntinodes); // Include the first node position
             while (true) {
               x -= unitDx;
@@ -68,8 +69,8 @@ public class Day8 {
             }
 
             // Check positions after p2
-            x = p2.x;
-            y = p2.y;
+            x = p2.x();
+            y = p2.y();
             checkAndAddAntinode(x, y, allPossibleAntinodes); // Include the second node position
             while (true) {
               x += unitDx;
@@ -80,9 +81,9 @@ public class Day8 {
             }
 
             // Check positions between p1 and p2
-            x = p1.x + unitDx;
-            y = p1.y + unitDy;
-            while (x != p2.x || y != p2.y) {
+            x = p1.x() + unitDx;
+            y = p1.y() + unitDy;
+            while (x != p2.x() || y != p2.y()) {
               checkAndAddAntinode(x, y, allPossibleAntinodes);
               x += unitDx;
               y += unitDy;
@@ -103,7 +104,7 @@ public class Day8 {
     for (int y = 0; y < rows; y++) {
       for (int x = 0; x < cols; x++) {
         if (isNode(map[y][x])) {
-          nodes.computeIfAbsent(map[y][x], k -> new ArrayList<>())
+          nodes.computeIfAbsent(map[y][x], _ -> new ArrayList<>())
               .add(new Point(x, y));
         }
       }
@@ -122,6 +123,4 @@ public class Day8 {
     }
     return false;
   }
-
-  private record Point(int x, int y) {}
 }

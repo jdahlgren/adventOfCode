@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import se.johannesdahlgren.adventofcode2019.util.FileToListUtil;
+import se.johannesdahlgren.util.Direction;
 import se.johannesdahlgren.util.Point;
 
 public class Day3 {
-
-  private static final String RIGHT = "R";
-  private static final String UP = "U";
-  private static final String LEFT = "L";
-  private static final String DOWN = "D";
 
   private final List<String> pathCommandsForLines;
   private List<Point> line1;
@@ -52,27 +48,13 @@ public class Day3 {
   }
 
   private void createPointFromStep(String step, List<Point> line) {
-    String direction = step.substring(0, 1);
+    Direction direction = Direction.fromShortName(step.substring(0, 1));
     int amount = Integer.parseInt(step.substring(1));
     for (int i = 0; i < amount; i++) {
       Point lastPoint = line.get(line.size() - 1);
-      Point nextPoint = getNewPointInDirection(direction, lastPoint);
+      Point nextPoint = lastPoint.nextPosition(direction);
       line.add(nextPoint);
     }
-  }
-
-  private Point getNewPointInDirection(String direction, Point lastPoint) {
-    switch (direction) {
-      case UP:
-        return new Point(lastPoint.x(), lastPoint.y() + 1);
-      case RIGHT:
-        return new Point(lastPoint.x() + 1, lastPoint.y());
-      case DOWN:
-        return new Point(lastPoint.x(), lastPoint.y() - 1);
-      case LEFT:
-        return new Point(lastPoint.x() - 1, lastPoint.y());
-    }
-    throw new RuntimeException("Unknown direction");
   }
 
   private List<Point> getIntersectingPoints() {

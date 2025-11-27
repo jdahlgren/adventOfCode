@@ -7,16 +7,17 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import se.johannesdahlgren.util.Point;
 
 public class Day13 {
 
   private final List<String> instructions;
-  private Set<Coord> randomDots;
+  private Set<Point> randomDots;
 
   public Day13(String s) {
     List<String> transparentPaper = FileUtil.readFileToStringList(s);
     instructions = transparentPaper.stream().filter(line -> line.contains("fold along")).toList();
-    randomDots = transparentPaper.stream().filter(line -> !line.contains("fold along")).filter(line -> !line.isBlank()).map(this::toCoord)
+    randomDots = transparentPaper.stream().filter(line -> !line.contains("fold along")).filter(line -> !line.isBlank()).map(this::toPoint)
         .collect(Collectors.toSet());
   }
 
@@ -45,15 +46,15 @@ public class Day13 {
   }
 
   private void fold(boolean isHorizontal, int foldSize) {
-    Set<Coord> dotsAfterFold = new HashSet<>();
+    Set<Point> dotsAfterFold = new HashSet<>();
 
-    for (Coord randomDot : randomDots) {
+    for (Point randomDot : randomDots) {
       if (isHorizontal && randomDot.y() > foldSize) {
         int newY = foldSize - (randomDot.y() - foldSize);
-        dotsAfterFold.add(new Coord(randomDot.x(), newY));
+        dotsAfterFold.add(new Point(randomDot.x(), newY));
       } else if (!isHorizontal && randomDot.x() > foldSize) {
         int newX = foldSize - (randomDot.x() - foldSize);
-        dotsAfterFold.add(new Coord(newX, randomDot.y()));
+        dotsAfterFold.add(new Point(newX, randomDot.y()));
       } else {
         dotsAfterFold.add(randomDot);
       }
@@ -63,12 +64,12 @@ public class Day13 {
   }
 
   private String printCode() {
-    int xMaxAtEnd = randomDots.stream().map(Coord::x).max(Comparator.naturalOrder()).orElse(0);
-    int yMaxAtEnd = randomDots.stream().map(Coord::y).max(Comparator.naturalOrder()).orElse(0);
+    int xMaxAtEnd = randomDots.stream().map(Point::x).max(Comparator.naturalOrder()).orElse(0);
+    int yMaxAtEnd = randomDots.stream().map(Point::y).max(Comparator.naturalOrder()).orElse(0);
     StringBuilder sb = new StringBuilder();
     for (int j = 0; j < yMaxAtEnd + 1; j++) {
       for (int i = 0; i < xMaxAtEnd + 1; i++) {
-        if (randomDots.contains(new Coord(i, j))) {
+        if (randomDots.contains(new Point(i, j))) {
           sb.append("#");
         } else {
           sb.append(" ");
@@ -80,13 +81,9 @@ public class Day13 {
     return sb.toString();
   }
 
-  private Coord toCoord(String line) {
+  private Point toPoint(String line) {
     String[] split = line.split(",");
-    return new Coord(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
-  }
-
-  private record Coord(int x, int y) {
-
+    return new Point(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
   }
 
 }

@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import se.johannesdahlgren.util.Point;
 
 public class Day6 {
   private enum Direction {
@@ -32,25 +33,24 @@ public class Day6 {
     }
   }
 
-  private record Position(int x, int y) {}
-  private record State(Position position, Direction direction) {}
+  private record State(Point position, Direction direction) {}
 
   public int part1() throws IOException {
     List<String> lines = Files.readAllLines(Path.of("src/main/resources/2024/day6"));
     char[][] map = createMap(lines);
-    Position startPos = findStartPosition(map);
+    Point startPos = findStartPosition(map);
     return simulateGuard(map, startPos).visitedPositions().size();
   }
 
   public int part2() throws IOException {
     List<String> lines = Files.readAllLines(Path.of("src/main/resources/2024/day6"));
     char[][] originalMap = createMap(lines);
-    Position startPos = findStartPosition(originalMap);
+    Point startPos = findStartPosition(originalMap);
     int loopCount = 0;
 
     for (int y = 0; y < originalMap.length; y++) {
       for (int x = 0; x < originalMap[y].length; x++) {
-        if (originalMap[y][x] == '#' || (x == startPos.x && y == startPos.y)) {
+        if (originalMap[y][x] == '#' || (x == startPos.x() && y == startPos.y())) {
           continue;
         }
 
@@ -66,13 +66,13 @@ public class Day6 {
     return loopCount;
   }
 
-  private record SimulationResult(Set<Position> visitedPositions, boolean isLoop) {}
+  private record SimulationResult(Set<Point> visitedPositions, boolean isLoop) {}
 
-  private SimulationResult simulateGuard(char[][] map, Position startPos) {
-    Set<Position> visitedPositions = new HashSet<>();
+  private SimulationResult simulateGuard(char[][] map, Point startPos) {
+    Set<Point> visitedPositions = new HashSet<>();
     Set<State> visitedStates = new HashSet<>();
     Direction currentDirection = Direction.NORTH;
-    Position currentPos = startPos;
+    Point currentPos = startPos;
     visitedPositions.add(currentPos);
 
     while (true) {
@@ -81,9 +81,9 @@ public class Day6 {
         return new SimulationResult(visitedPositions, true);
       }
 
-      Position nextPos = new Position(
-          currentPos.x + currentDirection.dx,
-          currentPos.y + currentDirection.dy
+      Point nextPos = new Point(
+          currentPos.x() + currentDirection.dx,
+          currentPos.y() + currentDirection.dy
       );
 
       if (!isInsideMap(nextPos, map)) {
@@ -105,18 +105,18 @@ public class Day6 {
   }
 
   private char[][] createMap(List<String> lines) {
-    char[][] map = new char[lines.size()][lines.get(0).length()];
+    char[][] map = new char[lines.size()][lines.getFirst().length()];
     for (int i = 0; i < lines.size(); i++) {
       map[i] = lines.get(i).toCharArray();
     }
     return map;
   }
 
-  private Position findStartPosition(char[][] map) {
+  private Point findStartPosition(char[][] map) {
     for (int y = 0; y < map.length; y++) {
       for (int x = 0; x < map[y].length; x++) {
         if (map[y][x] == '^') {
-          return new Position(x, y);
+          return new Point(x, y);
         }
       }
     }
@@ -131,13 +131,13 @@ public class Day6 {
     return copy;
   }
 
-  private boolean isInsideMap(Position pos, char[][] map) {
-    return pos.y >= 0 && pos.y < map.length &&
-        pos.x >= 0 && pos.x < map[pos.y].length;
+  private boolean isInsideMap(Point pos, char[][] map) {
+    return pos.y() >= 0 && pos.y() < map.length &&
+        pos.x() >= 0 && pos.x() < map[pos.y()].length;
   }
 
-  private boolean isObstacle(Position pos, char[][] map) {
-    return map[pos.y][pos.x] == '#';
+  private boolean isObstacle(Point pos, char[][] map) {
+    return map[pos.y()][pos.x()] == '#';
   }
 
 }

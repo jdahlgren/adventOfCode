@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
+import se.johannesdahlgren.util.Point;
 
 public class Day9 {
 
@@ -66,7 +67,7 @@ public class Day9 {
     if (basinNeighbors.size() != 0) {
       for (Point point : basinNeighbors.keySet()) {
         visitedPoints.add(point);
-        getBasinSize(point.col(), point.row(), visitedPoints);
+        getBasinSize(point.x(), point.y(), visitedPoints);
       }
       return visitedPoints.size();
     } else {
@@ -90,9 +91,5 @@ public class Day9 {
       }
     }
     return neighbors;
-  }
-
-  private record Point(int col, int row) {
-
   }
 }

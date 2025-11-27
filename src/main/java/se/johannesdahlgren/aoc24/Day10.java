@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import se.johannesdahlgren.util.Point;
 
 public class Day10 {
   private static final int[] DX = {0, 1, 0, -1}; // right, down, left, up
@@ -74,11 +75,11 @@ public class Day10 {
       return;
     }
 
-    int currentValue = heightMap[current.x][current.y];
+    int currentValue = heightMap[current.x()][current.y()];
 
     for (int i = 0; i < 4; i++) {
-      int newX = current.x + DX[i];
-      int newY = current.y + DY[i];
+      int newX = current.x() + DX[i];
+      int newY = current.y() + DY[i];
       Point next = new Point(newX, newY);
 
       if (isValid(newX, newY) && !currentPath.contains(next)) {
@@ -110,9 +111,5 @@ public class Day10 {
           .mapToInt(Integer::intValue)
           .sum();
     }
-  }
-
-  private record Point(int x, int y) {
-
   }
 }

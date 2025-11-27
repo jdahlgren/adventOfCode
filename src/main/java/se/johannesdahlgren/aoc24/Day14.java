@@ -4,44 +4,44 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import se.johannesdahlgren.util.Point;
 
 public class Day14 {
-  record Robot(Pair position, Pair velocity) {
-    Robot move(int width, int height) {
-      int newX = Math.floorMod(position.x + velocity.x, width);
-      int newY = Math.floorMod(position.y + velocity.y, height);
-      return new Robot(new Pair(newX, newY), velocity);
+  record Robot(Point position, Point velocity) {
+    Robot move() {
+      int newX = Math.floorMod(position.x() + velocity.x(), Day14.ROOM_WIDTH);
+      int newY = Math.floorMod(position.y() + velocity.y(), Day14.ROOM_HEIGHT);
+      return new Robot(new Point(newX, newY), velocity);
     }
 
-    String getQuadrant(int width, int height) {
-      int midX = width / 2;
-      int midY = height / 2;
+    String getQuadrant() {
+      int midX = Day14.ROOM_WIDTH / 2;
+      int midY = Day14.ROOM_HEIGHT / 2;
 
-      if (position.x == midX || position.y == midY) {
+      if (position.x() == midX || position.y() == midY) {
         return "middle";
       }
 
-      if (position.x < midX) {
-        return position.y < midY ? "top-left" : "bottom-left";
+      if (position.x() < midX) {
+        return position.y() < midY ? "top-left" : "bottom-left";
       } else {
-        return position.y < midY ? "top-right" : "bottom-right";
+        return position.y() < midY ? "top-right" : "bottom-right";
       }
     }
   }
-  record Pair(int x, int y) {}
 
   private static final int ROOM_WIDTH = 101;
   private static final int ROOM_HEIGHT = 103;
   private List<Robot> robots;
 
   public Day14() throws Exception {
-    robots = readRobots("src/main/resources/2024/day14");
+    robots = readRobots();
   }
 
   public long safetyFactor(int seconds) {
     for (int second = 1; second <= seconds; second++) {
       robots = robots.stream()
-          .map(r -> r.move(ROOM_WIDTH, ROOM_HEIGHT))
+          .map(Robot::move)
           .toList();
 
       if (second == 100 && seconds == 100) {
@@ -49,7 +49,7 @@ public class Day14 {
       }
 
       if (hasLargeCluster(robots)) {
-        printRoom(robots, ROOM_WIDTH, ROOM_HEIGHT);
+        printRoom(robots);
         return second;
       }
     }
@@ -58,19 +58,19 @@ public class Day14 {
 
   public long getProduct() {
     long topLeft = robots.stream()
-        .filter(r -> r.getQuadrant(ROOM_WIDTH, ROOM_HEIGHT).equals("top-left"))
+        .filter(r -> r.getQuadrant().equals("top-left"))
         .count();
 
     long topRight = robots.stream()
-        .filter(r -> r.getQuadrant(ROOM_WIDTH, ROOM_HEIGHT).equals("top-right"))
+        .filter(r -> r.getQuadrant().equals("top-right"))
         .count();
 
     long bottomLeft = robots.stream()
-        .filter(r -> r.getQuadrant(ROOM_WIDTH, ROOM_HEIGHT).equals("bottom-left"))
+        .filter(r -> r.getQuadrant().equals("bottom-left"))
         .count();
 
     long bottomRight = robots.stream()
-        .filter(r -> r.getQuadrant(ROOM_WIDTH, ROOM_HEIGHT).equals("bottom-right"))
+        .filter(r -> r.getQuadrant().equals("bottom-right"))
         .count();
     return topLeft * topRight * bottomLeft * bottomRight;
   }
@@ -79,18 +79,18 @@ public class Day14 {
     if (robots.isEmpty()) return false;
 
     // Find the main cluster
-    Set<Pair> visited = new HashSet<>();
-    List<Set<Pair>> clusters = new ArrayList<>();
+    Set<Point> visited = new HashSet<>();
+    List<Set<Point>> clusters = new ArrayList<>();
 
     for (Robot robot : robots) {
       if (visited.contains(robot.position)) continue;
 
-      Set<Pair> cluster = new HashSet<>();
-      Queue<Pair> queue = new LinkedList<>();
+      Set<Point> cluster = new HashSet<>();
+      Queue<Point> queue = new LinkedList<>();
       queue.add(robot.position);
 
       while (!queue.isEmpty()) {
-        Pair pos = queue.poll();
+        Point pos = queue.poll();
         if (!visited.add(pos)) continue;
         cluster.add(pos);
 
@@ -107,7 +107,7 @@ public class Day14 {
     }
 
     // Find the largest cluster
-    Optional<Set<Pair>> largestCluster = clusters.stream()
+    Optional<Set<Point>> largestCluster = clusters.stream()
         .max(Comparator.comparingInt(Set::size));
 
     // Check if the largest cluster contains at least 90% of all robots
@@ -116,43 +116,43 @@ public class Day14 {
     ).orElse(false);
   }
 
-  private static boolean isAdjacent(Pair p1, Pair p2) {
-    int dx = Math.abs(p1.x - p2.x);
-    int dy = Math.abs(p1.y - p2.y);
+  private static boolean isAdjacent(Point p1, Point p2) {
+    int dx = Math.abs(p1.x() - p2.x());
+    int dy = Math.abs(p1.y()- p2.y());
     return dx <= 1 && dy <= 1;
   }
 
-  private static void printRoom(List<Robot> robots, int width, int height) {
-    char[][] grid = new char[height][width];
-    for (int y = 0; y < height; y++) {
-      for (int x = 0; x < width; x++) {
+  private static void printRoom(List<Robot> robots) {
+    char[][] grid = new char[Day14.ROOM_HEIGHT][Day14.ROOM_WIDTH];
+    for (int y = 0; y < Day14.ROOM_HEIGHT; y++) {
+      for (int x = 0; x < Day14.ROOM_WIDTH; x++) {
         grid[y][x] = '.';
       }
     }
 
     for (Robot robot : robots) {
-      grid[robot.position.y][robot.position.x] = '#';
+      grid[robot.position.y()][robot.position.x()] = '#';
     }
 
-    for (int y = 0; y < height; y++) {
-      for (int x = 0; x < width; x++) {
+    for (int y = 0; y < Day14.ROOM_HEIGHT; y++) {
+      for (int x = 0; x < Day14.ROOM_WIDTH; x++) {
         System.out.print(grid[y][x]);
       }
       System.out.println();
     }
   }
 
-  private static List<Robot> readRobots(String filename) throws Exception {
+  private static List<Robot> readRobots() throws Exception {
     List<Robot> robots = new ArrayList<>();
-    Path path = Paths.get(filename);
+    Path path = Paths.get("src/main/resources/2024/day14");
 
     List<String> lines = Files.readAllLines(path);
     for (String line : lines) {
       if (line.isEmpty()) continue;
 
       String[] parts = line.split(" ");
-      Pair position = parsePair(parts[0].substring(2));
-      Pair velocity = parsePair(parts[1].substring(2));
+      Point position = parsePair(parts[0].substring(2));
+      Point velocity = parsePair(parts[1].substring(2));
 
       robots.add(new Robot(position, velocity));
     }
@@ -160,9 +160,9 @@ public class Day14 {
     return robots;
   }
 
-  private static Pair parsePair(String input) {
+  private static Point parsePair(String input) {
     String[] coordinates = input.split(",");
-    return new Pair(
+    return new Point(
         Integer.parseInt(coordinates[0]),
         Integer.parseInt(coordinates[1])
     );
