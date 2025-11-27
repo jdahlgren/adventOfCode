@@ -3,8 +3,6 @@ package se.johannesdahlgren.adventofcode2019.util;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class IntCodeComputer {
 
@@ -23,7 +21,6 @@ public class IntCodeComputer {
 
   private static final int NOUN_POSITION = 1;
   private static final int VERB_POSITION = 2;
-  private static final Logger log = LoggerFactory.getLogger(IntCodeComputer.class);
 
   private final List<Integer> defaultIntCode;
   private List<Integer> currentIntCode;
@@ -89,20 +86,20 @@ public class IntCodeComputer {
       int index = getIndexByParameterMode(1, opCodeInstruction);
       Integer input = inputList.poll();
       currentIntCode.set(index, input);
-      log.info("Saved {} on pos {}", input, index);
+      System.out.printf("Saved %s on pos %s%n", input, index);
       currentIndex += 2;
       return;
     } else if (OP_CODE_VIEW_VALUE == opCode) {
       int index = getIndexByParameterMode(1, opCodeInstruction);
       output = currentIntCode.get(index);
-      log.info("Output is {}", output);
+      System.out.printf("Output is %s%n", output);
       currentIndex += 2;
       return;
     } else if (OP_CODE_JUMP_IF_TRUE == opCode) {
       int index = getIndexByParameterMode(1, opCodeInstruction);
       if (currentIntCode.get(index) != 0) {
         currentIndex = currentIntCode.get(getIndexByParameterMode(2, opCodeInstruction));
-        log.info("Jumping to index {}", currentIndex);
+        System.out.printf("Jumping to index %s%n", currentIndex);
       } else {
         currentIndex += 3;
       }
@@ -111,7 +108,7 @@ public class IntCodeComputer {
       int index = getIndexByParameterMode(1, opCodeInstruction);
       if (currentIntCode.get(index) == 0) {
         currentIndex = currentIntCode.get(getIndexByParameterMode(2, opCodeInstruction));
-        log.info("Jumping to index {}", currentIndex);
+        System.out.printf("Jumping to index %s%n", currentIndex);
       } else {
         currentIndex += 3;
       }
@@ -143,7 +140,7 @@ public class IntCodeComputer {
   private void setNewValueInIntCode(int newValue, String opCodeInstruction) {
     int index = getIndexByParameterMode(3, opCodeInstruction);
     currentIntCode.set(index, newValue);
-    log.info("Saved {} on pos {}", newValue, index);
+    System.out.printf("Saved %s on pos %s%n", newValue, index);
   }
 
   private String getPaddedInstruction(int instruction) {
@@ -155,7 +152,7 @@ public class IntCodeComputer {
     int param2 = getIndexByParameterMode(2, opCodeInstruction);
     Integer v1 = currentIntCode.get(param1);
     Integer v2 = currentIntCode.get(param2);
-    log.info("Adding {} + {} from positions {}, {}", v1, v2, param1, param2);
+    System.out.printf("Adding %s + %s from positions %s, %s%n", v1, v2, param1, param2);
     return v1 + v2;
   }
 
@@ -164,7 +161,7 @@ public class IntCodeComputer {
     int param2 = getIndexByParameterMode(2, opCodeInstruction);
     Integer v1 = currentIntCode.get(param1);
     Integer v2 = currentIntCode.get(param2);
-    log.info("Multiplying {} * {} from positions {}, {}", v1, v2, param1, param2);
+    System.out.printf("Multiplying %s * %s from positions %s, %s%n", v1, v2, param1, param2);
     return v1 * v2;
   }
 

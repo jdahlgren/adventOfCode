@@ -7,13 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import se.johannesdahlgren.util.IntPair;
 
 public class Day1 {
-
-  private static final Logger log = LoggerFactory.getLogger(Day1.class);
 
   public int part1() throws IOException {
     List<IntPair> pairs = readPairsFromFile("src/main/resources/2024/day1");
@@ -23,9 +19,9 @@ public class Day1 {
   public long part2() throws IOException {
     List<IntPair> pairs = readPairsFromFile("src/main/resources/2024/day1");
     Map<Integer, Long> occurrences = countOccurrencesInSecondColumn(pairs);
-    log.debug("Occurrences of first column elements in the second column:");
+    IO.println("Occurrences of first column elements in the second column:");
     occurrences.forEach((key, value)
-        -> log.debug("{} occurs {} time(s)", key, value));
+        -> System.out.printf("%s occurs %s time(s)%n", key, value));
     return calculateSimilarityScore(occurrences);
   }
 

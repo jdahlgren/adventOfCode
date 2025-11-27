@@ -2,15 +2,12 @@ package se.johannesdahlgren.adventofcode2019;
 
 import java.util.Arrays;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import se.johannesdahlgren.adventofcode2019.util.FileToListUtil;
 import se.johannesdahlgren.adventofcode2019.util.IntCodeComputer;
 import se.johannesdahlgren.adventofcode2019.util.PermutePhaseSettings;
 
 public class Day7 {
 
-  private static final Logger log = LoggerFactory.getLogger(Day7.class);
   private final List<Integer> intCode;
 
   public Day7(String filePath) {
@@ -24,7 +21,7 @@ public class Day7 {
       intCodeComputer.run();
       output = intCodeComputer.getOutput();
     }
-    log.info("Thruster signal is {} for phase setting {}", output, phaseSettingSequence);
+    System.out.printf("Thruster signal is %s for phase setting %s", output, phaseSettingSequence);
     return output;
   }
 
