@@ -12,14 +12,6 @@ public class Day8 {
   private final Set<Point> antinodes = new HashSet<>();
   private final Set<Point> allPossibleAntinodes = new HashSet<>();
 
-  public static void main(String[] args) throws IOException {
-    Day8 day8 = new Day8();
-    int part1 = day8.countAntinodes();
-    int part2 = day8.countAllPossibleAntinodes();
-    System.out.println("Part 1 - Number of antinodes at double distance: " + part1);
-    System.out.println("Part 2 - Number of antinodes at all distances: " + part2);
-  }
-
   public Day8() throws IOException {
     List<String> lines = Files.readAllLines(Path.of("src/main/resources/2024/day8"));
     this.rows = lines.size();

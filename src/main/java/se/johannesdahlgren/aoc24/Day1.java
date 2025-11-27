@@ -15,34 +15,34 @@ public class Day1 {
 
   private static final Logger log = LoggerFactory.getLogger(Day1.class);
 
-  public static void main(String[] args) throws IOException {
+  public int part1() throws IOException {
     List<Pair> pairs = readPairsFromFile("src/main/resources/2024/day1");
-    int result = calculateColumnDistanceSum(pairs);
-    log.info("Sum of column distances: {}", result);
-
-    Map<Integer, Long> occurrences = countOccurrencesInSecondColumn(pairs);
-    log.info("Occurrences of first column elements in the second column:");
-    occurrences.forEach((key, value)
-        -> log.info("{} occurs {} time(s)", key, value));
-    long similarityScore = calculateSimilarityScore(occurrences);
-    log.info("Similarity Score: {}", similarityScore);
-
+    return calculateColumnDistanceSum(pairs);
   }
 
-  static List<Pair> readPairsFromFile(String filePath) throws IOException {
+  public long part2() throws IOException {
+    List<Pair> pairs = readPairsFromFile("src/main/resources/2024/day1");
+    Map<Integer, Long> occurrences = countOccurrencesInSecondColumn(pairs);
+    log.debug("Occurrences of first column elements in the second column:");
+    occurrences.forEach((key, value)
+        -> log.debug("{} occurs {} time(s)", key, value));
+    return calculateSimilarityScore(occurrences);
+  }
+
+  List<Pair> readPairsFromFile(String filePath) throws IOException {
     try (var lines = Files.lines(Path.of(filePath))) {
       return lines
-          .map(Day1::getPair)
+          .map(this::getPair)
           .toList();
     }
   }
 
-  private static Pair getPair(String line) {
+  private Pair getPair(String line) {
     String[] parts = line.split("\\s+");
-      return new Pair(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+    return new Pair(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
   }
 
-  static int calculateColumnDistanceSum(List<Pair> pairs) {
+  int calculateColumnDistanceSum(List<Pair> pairs) {
     List<Integer> leftColumn = pairs.stream().mapToInt(Pair::left).sorted().boxed().toList();
     List<Integer> rightColumn = pairs.stream().mapToInt(Pair::right).sorted().boxed().toList();
 
@@ -51,7 +51,7 @@ public class Day1 {
         .sum();
   }
 
-  static Map<Integer, Long> countOccurrencesInSecondColumn(List<Pair> pairs) {
+  Map<Integer, Long> countOccurrencesInSecondColumn(List<Pair> pairs) {
     List<Integer> firstColumn = pairs.stream().map(Pair::left).toList();
     List<Integer> secondColumn = pairs.stream().map(Pair::right).toList();
 
@@ -64,7 +64,7 @@ public class Day1 {
         ));
   }
 
-  static long calculateSimilarityScore(Map<Integer, Long> occurrences) {
+  long calculateSimilarityScore(Map<Integer, Long> occurrences) {
     return occurrences.entrySet().stream()
         .mapToLong(entry -> entry.getKey() * entry.getValue())
         .sum();

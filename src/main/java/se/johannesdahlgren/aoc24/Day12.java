@@ -13,14 +13,15 @@ public class Day12 {
 
   record Plot(Set<Point> points, char letter, int area, int perimeter) {}
 
-  public void solve() {
+  public long solve() {
     readInput();
     findPlots();
     System.out.println("Number of plots: " + plots.size());
-    printPlots();
+    //printPlots();
 
     long totalSum = calculateTotalSum();
     System.out.println("\nFinal sum (sum of area * perimeter for all plots): " + totalSum);
+    return totalSum;
   }
 
   private long calculateTotalSum() {
@@ -130,9 +131,5 @@ public class Day12 {
       }
       System.out.println();
     }
-  }
-
-  public static void main(String[] args) {
-    new Day12().solve();
   }
 }

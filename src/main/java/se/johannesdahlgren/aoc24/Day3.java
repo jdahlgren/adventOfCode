@@ -1,12 +1,10 @@
 package se.johannesdahlgren.aoc24;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day3 {
+
   private static final Pattern MULTIPLICATION_PATTERN = Pattern.compile("mul\\((\\d{1,3}),(\\d{1,3})\\)");
 
   private static int calculateMultiplication(String matchText) {
@@ -52,18 +50,5 @@ public class Day3 {
     }
 
     return sum;
-  }
-
-  public static void main(String[] args) {
-    try {
-      // Read input from file
-      String input = Files.readString(Path.of("src/main/resources/2024/day3"));
-
-      System.out.println("Part 1 sum: " + findAndSumMultiplications(input));
-      System.out.println("Part 2 sum: " + findAndSumMultiplicationsWithReset(input));
-
-    } catch (IOException e) {
-      System.err.println("Error reading file: " + e.getMessage());
-    }
   }
 }

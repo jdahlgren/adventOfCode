@@ -12,23 +12,12 @@ import java.util.Map;
 
 public class Day9 {
   private static final int BLANK_SPACE = -1; // Using -1 to represent blank space
+  private final List<Integer> initialSequence;
 
-  public static void main(String[] args) throws IOException {
-    Day9 day9 = new Day9();
-    String input = day9.readInputFile();
-    List<Integer> numbers = day9.parseInput(input);
-    List<Integer> initialSequence = day9.processSequence(numbers);
-    List<Integer> individualMoveSequence = day9.moveNumbersToSpaces(initialSequence);
-    List<Integer> groupMoveSequence = day9.moveGroupsToSpaces(initialSequence);
-
-    long individualSum = day9.calculateSum(individualMoveSequence);
-    long groupSum = day9.calculateSum(groupMoveSequence);
-
-    System.out.println("Initial sequence: " + formatSequence(initialSequence));
-    System.out.println("Individual move sequence: " + formatSequence(individualMoveSequence));
-    System.out.println("Individual move sum: " + individualSum);
-    System.out.println("Group move sequence: " + formatSequence(groupMoveSequence));
-    System.out.println("Group move sum: " + groupSum);
+  public Day9() throws IOException {
+    String input = readInputFile();
+    List<Integer> numbers = parseInput(input);
+    initialSequence = processSequence(numbers);
   }
 
   private String readInputFile() throws IOException {
@@ -65,8 +54,8 @@ public class Day9 {
     }
   }
 
-  private List<Integer> moveNumbersToSpaces(List<Integer> sequence) {
-    List<Integer> result = new ArrayList<>(sequence);
+  public List<Integer> moveNumbersToSpaces() {
+    List<Integer> result = new ArrayList<>(initialSequence);
 
     List<Integer> spaceIndices = new ArrayList<>();
     for (int i = 0; i < result.size(); i++) {
@@ -96,7 +85,7 @@ public class Day9 {
     return result;
   }
 
-  private long calculateSum(List<Integer> sequence) {
+  public long calculateSum(List<Integer> sequence) {
     long sum = 0;
     for (int i = 0; i < sequence.size(); i++) {
       int number = sequence.get(i);
@@ -114,8 +103,8 @@ public class Day9 {
   }
 
 
-  private List<Integer> moveGroupsToSpaces(List<Integer> sequence) {
-    List<Integer> result = new ArrayList<>(sequence);
+  public List<Integer> moveGroupsToSpaces() {
+    List<Integer> result = new ArrayList<>(initialSequence);
 
     // Create a map of numbers and their positions
     Map<Integer, List<Integer>> numberPositions = new HashMap<>();

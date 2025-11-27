@@ -9,39 +9,37 @@ import java.util.List;
 
 public class Day2 {
 
-  public static void main(String[] args) {
-    try {
-      String filePath = "src/main/resources/2024/day2";
-      int validLinesPart1 = countValidLinesPart1(filePath);
-      int validLinesPart2 = countValidLinesPart2(filePath);
-      System.out.println("Total valid lines: " + validLinesPart1);
-      System.out.println("Total valid lines: " + validLinesPart2);
-    } catch (IOException e) {
-      System.err.println("Error reading file: " + e.getMessage());
-    }
+  private static final String FILE_PATH = "src/main/resources/2024/day2";
+
+  public int part1() throws IOException {
+    return countValidLinesPart1(FILE_PATH);
   }
 
-  private static int countValidLinesPart1(String filePath) throws IOException {
+  public int part2() throws IOException {
+    return countValidLinesPart2(FILE_PATH);
+  }
+
+  private int countValidLinesPart1(String filePath) throws IOException {
     return Files.readAllLines(Path.of(filePath)).stream()
-        .map(Day2::parseNumbers)
-        .mapToInt(Day2::isValidSequencePart1)
+        .map(this::parseNumbers)
+        .mapToInt(this::isValidSequencePart1)
         .sum();
   }
 
-  private static int countValidLinesPart2(String filePath) throws IOException {
+  private int countValidLinesPart2(String filePath) throws IOException {
     return Files.readAllLines(Path.of(filePath)).stream()
-        .map(Day2::parseNumbers)
-        .mapToInt(Day2::canBeValid)
+        .map(this::parseNumbers)
+        .mapToInt(this::canBeValid)
         .sum();
   }
 
-  private static List<Integer> parseNumbers(String line) {
+  private List<Integer> parseNumbers(String line) {
     return Arrays.stream(line.trim().split("\\s+"))
         .map(Integer::parseInt)
         .toList();
   }
 
-  private static int canBeValid(List<Integer> numbers) {
+  private int canBeValid(List<Integer> numbers) {
     // If it's already valid, return 1
     if (isValidSequence(numbers)) {
       return 1;
@@ -59,14 +57,14 @@ public class Day2 {
     return 0;
   }
 
-  private static int isValidSequencePart1(List<Integer> numbers) {
+  private int isValidSequencePart1(List<Integer> numbers) {
     if (isValidSequence(numbers)) {
       return 1;
     }
     return 0;
   }
 
-  private static boolean isValidSequence(List<Integer> numbers) {
+  private boolean isValidSequence(List<Integer> numbers) {
     if (numbers.size() < 2) return true;
 
     boolean increasing = true;

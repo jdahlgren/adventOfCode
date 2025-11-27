@@ -12,13 +12,7 @@ public class Day11 {
   private static final BigInteger MULTIPLIER = BigInteger.valueOf(2024);
   private static final Map<BigInteger, List<BigInteger>> memo = new HashMap<>();
 
-  public static void main(String[] args) throws Exception {
-    processInput(25);
-    memo.clear(); // Clear memo between runs
-    processInput(75);
-  }
-
-  private static void processInput(int turns) throws Exception {
+  public long processInput(int turns) throws Exception {
     String input = Files.readString(Path.of("src/main/resources/2024/day11"));
     Map<BigInteger, Long> numberCounts = new HashMap<>();
 
@@ -45,8 +39,7 @@ public class Day11 {
       numberCounts = newNumberCounts;
     }
 
-    long totalCount = numberCounts.values().stream().mapToLong(Long::longValue).sum();
-    System.out.println("Final number count after " + turns + " turns: " + totalCount);
+    return numberCounts.values().stream().mapToLong(Long::longValue).sum();
   }
 
   private static List<BigInteger> processNumber(BigInteger num) {

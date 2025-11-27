@@ -104,10 +104,4 @@ public record Day4(char[][] matrix) {
 
     return isInBounds(row, col) && isInBounds(endRow, endCol);
   }
-
-  public static void main(String[] args) {
-    var solver = new Day4();
-    System.out.println("XMAS occurrences: " + solver.findXMAS());
-    System.out.println("MAS X-pattern occurrences: " + solver.findMASCross());
-  }
 }

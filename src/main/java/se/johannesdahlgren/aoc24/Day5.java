@@ -101,17 +101,4 @@ public class Day5 {
     // Check if the before number comes before the after number
     return beforeIndex < afterIndex;
   }
-
-  public static void main(String[] args) throws IOException {
-    Day5 validator = new Day5();
-    validator.loadFromFile("src/main/resources/2024/day5");
-
-    // Part 1: Original sum of valid lists
-    int originalSum = validator.sumMiddleNumbersOfValidLists();
-    System.out.println("Sum of middle numbers from valid lists: " + originalSum);
-
-    // Part 2: Sum after fixing invalid lists
-    int fixedSum = validator.sumMiddleNumbersOfFixedInvalidLists();
-    System.out.println("Sum of middle numbers after fixing lists: " + fixedSum);
-  }
 }

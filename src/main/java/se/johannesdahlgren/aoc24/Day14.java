@@ -30,62 +30,49 @@ public class Day14 {
   }
   record Pair(int x, int y) {}
 
-  public static void main(String[] args) throws Exception {
-    final int ROOM_WIDTH = 101;
-    final int ROOM_HEIGHT = 103;
-    final int MAX_SECONDS = 10000; // Increased to 10000 seconds
+  private static final int ROOM_WIDTH = 101;
+  private static final int ROOM_HEIGHT = 103;
+  private List<Robot> robots;
 
-    List<Robot> robots = readRobots("src/main/resources/2024/day14");
-    List<Robot> robotsAt100 = null; // Store state at 100 seconds for part 1
+  public Day14() throws Exception {
+    robots = readRobots("src/main/resources/2024/day14");
+  }
 
-    for (int second = 1; second <= MAX_SECONDS; second++) {
+  public long safetyFactor(int seconds) {
+    for (int second = 1; second <= seconds; second++) {
       robots = robots.stream()
           .map(r -> r.move(ROOM_WIDTH, ROOM_HEIGHT))
           .toList();
 
-      if (second == 100) {
-        robotsAt100 = new ArrayList<>(robots);
+      if (second == 100 && seconds == 100) {
+        return getProduct();
       }
 
       if (hasLargeCluster(robots)) {
-        System.out.println("\nPossible pattern at second " + second + ":");
         printRoom(robots, ROOM_WIDTH, ROOM_HEIGHT);
-        System.out.println("Press Enter to continue or 'q' to quit...");
-        if (System.in.read() == 'q') {
-          break;
-        }
+        return second;
       }
     }
-
-    // Part 1 calculations using robots at 100 seconds
-    printQuadrantResults(robotsAt100, ROOM_WIDTH, ROOM_HEIGHT);
+    return -1L;
   }
 
-  private static void printQuadrantResults(List<Robot> robots, int width, int height) {
-    if (robots == null) return;
-
+  public long getProduct() {
     long topLeft = robots.stream()
-        .filter(r -> r.getQuadrant(width, height).equals("top-left"))
+        .filter(r -> r.getQuadrant(ROOM_WIDTH, ROOM_HEIGHT).equals("top-left"))
         .count();
 
     long topRight = robots.stream()
-        .filter(r -> r.getQuadrant(width, height).equals("top-right"))
+        .filter(r -> r.getQuadrant(ROOM_WIDTH, ROOM_HEIGHT).equals("top-right"))
         .count();
 
     long bottomLeft = robots.stream()
-        .filter(r -> r.getQuadrant(width, height).equals("bottom-left"))
+        .filter(r -> r.getQuadrant(ROOM_WIDTH, ROOM_HEIGHT).equals("bottom-left"))
         .count();
 
     long bottomRight = robots.stream()
-        .filter(r -> r.getQuadrant(width, height).equals("bottom-right"))
+        .filter(r -> r.getQuadrant(ROOM_WIDTH, ROOM_HEIGHT).equals("bottom-right"))
         .count();
-
-    System.out.println("\nQuadrant counts at 100 seconds:");
-    System.out.println("Top-left: " + topLeft);
-    System.out.println("Top-right: " + topRight);
-    System.out.println("Bottom-left: " + bottomLeft);
-    System.out.println("Bottom-right: " + bottomRight);
-    System.out.println("Product: " + (topLeft * topRight * bottomLeft * bottomRight));
+    return topLeft * topRight * bottomLeft * bottomRight;
   }
 
   private static boolean hasLargeCluster(List<Robot> robots) {

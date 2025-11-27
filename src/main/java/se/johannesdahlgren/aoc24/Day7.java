@@ -9,14 +9,6 @@ import java.util.logging.Logger;
 public class Day7 {
   private static final Logger LOGGER = Logger.getLogger(Day7.class.getName());
 
-  public static void main(String[] args) {
-    Day7 day7 = new Day7();
-    long sumTwoOperators = day7.sumValidTestNumbers(false);
-    long sumThreeOperators = day7.sumValidTestNumbers(true);
-    System.out.println("Sum of valid test numbers (+ and *): " + sumTwoOperators);
-    System.out.println("Sum of valid test numbers (+, * and ||): " + sumThreeOperators);
-  }
-
   public long sumValidTestNumbers(boolean includeConcatenation) {
     long sum = 0;
     try {

@@ -41,6 +41,26 @@ public class Day13 {
     }
   }
 
+  private final String[] machines;
+  public Day13() throws IOException {
+    String input = Files.readString(Path.of("src/main/resources/2024/day13"));
+    machines = input.split("\n\\s*\n");
+  }
+
+  public int solveMachines() {
+    int totalTokens = 0;
+    for (int i = 0; i < machines.length; i++) {
+      int tokens = solveMachine(machines[i].trim());
+      if (tokens != -1) {
+        System.out.println("Machine " + (i + 1) + ": " + tokens + " tokens");
+        totalTokens += tokens;
+      } else {
+        System.out.println("Machine " + (i + 1) + ": No solution found");
+      }
+    }
+    System.out.println("Total tokens needed: " + totalTokens);
+    return totalTokens;
+  }
   public static int solveMachine(String input) {
     String[] lines = input.trim().split("\n");
 
@@ -109,23 +129,6 @@ public class Day13 {
     // Add some reasonable bounds to prevent infinite exploration
     int maxDistance = Math.max(Math.abs(targetX), Math.abs(targetY)) * 2;
     return Math.abs(pos.x) <= maxDistance && Math.abs(pos.y) <= maxDistance;
-  }
-
-  public static void main(String[] args) throws IOException {
-    String input = Files.readString(Path.of("src/main/resources/2024/day13"));
-    String[] machines = input.split("\n\\s*\n");
-
-    int totalTokens = 0;
-    for (int i = 0; i < machines.length; i++) {
-      int tokens = solveMachine(machines[i].trim());
-      if (tokens != -1) {
-        System.out.println("Machine " + (i + 1) + ": " + tokens + " tokens");
-        totalTokens += tokens;
-      } else {
-        System.out.println("Machine " + (i + 1) + ": No solution found");
-      }
-    }
-    System.out.println("Total tokens needed: " + totalTokens);
   }
 }
 

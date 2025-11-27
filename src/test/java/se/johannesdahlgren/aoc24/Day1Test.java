@@ -1,5 +1,6 @@
 package se.johannesdahlgren.aoc24;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,7 +29,7 @@ class Day1Test {
         new Pair(3, 3)
     );
 
-    int result = Day1.calculateColumnDistanceSum(pairs);
+    int result = new Day1().calculateColumnDistanceSum(pairs);
     assertEquals(11, result, "The sum of column distances should be 11");
   }
 
@@ -37,7 +38,7 @@ class Day1Test {
     Path inputFile = tempDir.resolve("test_input.txt");
     Files.writeString(inputFile, "3 4\n4 3\n2 5\n1 3\n3 9\n3 3");
 
-    List<Pair> pairs = Day1.readPairsFromFile(inputFile.toString());
+    List<Pair> pairs = new Day1().readPairsFromFile(inputFile.toString());
 
     assertEquals(6, pairs.size(), "Should read 6 pairs from the file");
     assertEquals(new Pair(3, 4), pairs.get(0), "First pair should be (3, 4)");
@@ -48,14 +49,14 @@ class Day1Test {
   void testCalculateDistancesWithEmptyList() {
     List<Pair> pairs = new ArrayList<>();
 
-    int result = Day1.calculateColumnDistanceSum(pairs);
+    int result = new Day1().calculateColumnDistanceSum(pairs);
     assertEquals(0, result, "The sum of column distances for an empty list should be 0");
   }
 
   @Test
   void testReadPairsFromNonExistentFile() {
     assertThrows(IOException.class, ()
-        -> Day1.readPairsFromFile("non_existent_file.txt"), "Should throw IOException for non-existent file");
+        -> new Day1().readPairsFromFile("non_existent_file.txt"), "Should throw IOException for non-existent file");
   }
 
   private List<Pair> testPairs;
@@ -74,7 +75,7 @@ class Day1Test {
 
   @Test
   void testCountOccurrencesInSecondColumn() {
-    Map<Integer, Long> occurrences = Day1.countOccurrencesInSecondColumn(testPairs);
+    Map<Integer, Long> occurrences = new Day1().countOccurrencesInSecondColumn(testPairs);
 
     assertEquals(4, occurrences.size(), "Should have 4 unique elements from the first column");
     assertEquals(9L, occurrences.get(3), "3 should occur 9 times in the second column");
@@ -92,7 +93,7 @@ class Day1Test {
         1, 1L
     );
 
-    long similarityScore = Day1.calculateSimilarityScore(occurrences);
+    long similarityScore = new Day1().calculateSimilarityScore(occurrences);
 
     assertEquals(11, similarityScore, "Similarity score should be (3*2 + 4*1 + 2*0 + 1*1) = 11");
   }
@@ -101,13 +102,27 @@ class Day1Test {
   void testWithEmptyList() {
     List<Pair> emptyList = List.of();
 
-    Map<Integer, Long> occurrences = Day1.countOccurrencesInSecondColumn(emptyList);
+    Map<Integer, Long> occurrences = new Day1().countOccurrencesInSecondColumn(emptyList);
     assertTrue(occurrences.isEmpty(), "Occurrences map should be empty for an empty list");
 
-    long similarityScore = Day1.calculateSimilarityScore(occurrences);
+    long similarityScore = new Day1().calculateSimilarityScore(occurrences);
     assertEquals(0, similarityScore, "Similarity score should be 0 for an empty list");
 
-    int distanceSum = Day1.calculateColumnDistanceSum(emptyList);
+    int distanceSum = new Day1().calculateColumnDistanceSum(emptyList);
     assertEquals(0, distanceSum, "Distance sum should be 0 for an empty list");
+  }
+
+  @Test
+  void part1() throws IOException {
+    Day1 day1 = new Day1();
+    int result = day1.part1();
+    assertThat(result).isEqualTo(3569916);
+  }
+
+  @Test
+  void part2() throws IOException {
+    Day1 day1 = new Day1();
+    long result = day1.part2();
+    assertThat(result).isEqualTo(26407426);
   }
 }

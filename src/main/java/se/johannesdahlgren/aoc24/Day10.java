@@ -104,21 +104,15 @@ public class Day10 {
       this.reachableNinesCount = reachableNinesCount;
       this.totalDistinctPaths = totalDistinctPaths;
     }
+
+    public int getNumberOfReachableNines() {
+      return reachableNinesCount.stream()
+          .mapToInt(Integer::intValue)
+          .sum();
+    }
   }
 
   private record Point(int x, int y) {
 
-  }
-
-  public static void main(String[] args) throws IOException {
-    Day10 solver = new Day10("src/main/resources/2024/day10");
-    Result result = solver.solve();
-
-    int totalReachableNines = result.reachableNinesCount.stream()
-        .mapToInt(Integer::intValue)
-        .sum();
-
-    System.out.println("Total sum of all reachable 9s: " + totalReachableNines);
-    System.out.println("Total number of distinct paths: " + result.totalDistinctPaths);
   }
 }

@@ -140,12 +140,4 @@ public class Day6 {
     return map[pos.y][pos.x] == '#';
   }
 
-public static void main(String[] args) throws IOException {
-    Day6 day6 = new Day6();
-    int part1 = day6.part1();
-    int part2 = day6.part2();
-    System.out.println("Part 1: " + part1);
-    System.out.println("Part 2: " + part2);
-
-  }
 }
