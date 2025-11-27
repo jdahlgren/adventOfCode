@@ -3,13 +3,14 @@ package se.johannesdahlgren.adventofcode2021;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
+import se.johannesdahlgren.util.Line;
 
 public final class HydroThermalVentsMap {
 
-  private final List<HydroThermalVentsLine> hydroThermalVentsLines;
+  private final List<Line> hydroThermalVentsLines;
   private final int[][] hydrothermalVentsMap;
 
-  public HydroThermalVentsMap(List<HydroThermalVentsLine> hydroThermalVentsLines) {
+  public HydroThermalVentsMap(List<Line> hydroThermalVentsLines) {
     this.hydroThermalVentsLines = hydroThermalVentsLines;
     int maxX = getMaxX(hydroThermalVentsLines);
     int maxY = getMaxY(hydroThermalVentsLines);
@@ -17,7 +18,7 @@ public final class HydroThermalVentsMap {
   }
 
   public void drawHorizontalAndVerticalLines() {
-    for (HydroThermalVentsLine hydroThermalVentsLine : hydroThermalVentsLines) {
+    for (Line hydroThermalVentsLine : hydroThermalVentsLines) {
       if (hydroThermalVentsLine.isHorizontal()) {
         drawHorizontalLine(hydroThermalVentsLine);
       }
@@ -28,7 +29,7 @@ public final class HydroThermalVentsMap {
   }
 
   public void drawDiagonalLines() {
-    for (HydroThermalVentsLine hydroThermalVentsLine : hydroThermalVentsLines) {
+    for (Line hydroThermalVentsLine : hydroThermalVentsLines) {
       if (hydroThermalVentsLine.isDiagonal()) {
         drawDiagonalLine(hydroThermalVentsLine);
       }
@@ -51,81 +52,75 @@ public final class HydroThermalVentsMap {
     }
   }
 
-  private void drawVerticalLine(HydroThermalVentsLine hydroThermalVentsLine) {
-    if (hydroThermalVentsLine.x1() < hydroThermalVentsLine.x2()) {
-      IntStream.rangeClosed(hydroThermalVentsLine.x1(), hydroThermalVentsLine.x2())
-          .forEach(x -> hydrothermalVentsMap[hydroThermalVentsLine.y1()][x] += 1);
+  private void drawVerticalLine(Line hydroThermalVentsLine) {
+    if (hydroThermalVentsLine.getStartX() < hydroThermalVentsLine.getEndX()) {
+      IntStream.rangeClosed(hydroThermalVentsLine.getStartX(), hydroThermalVentsLine.getEndX())
+          .forEach(x -> hydrothermalVentsMap[hydroThermalVentsLine.getStartY()][x] += 1);
     } else {
-      IntStream.rangeClosed(hydroThermalVentsLine.x2(), hydroThermalVentsLine.x1())
-          .forEach(x -> hydrothermalVentsMap[hydroThermalVentsLine.y1()][x] += 1);
+      IntStream.rangeClosed(hydroThermalVentsLine.getEndX(), hydroThermalVentsLine.getStartX())
+          .forEach(x -> hydrothermalVentsMap[hydroThermalVentsLine.getStartY()][x] += 1);
     }
   }
 
-  private void drawHorizontalLine(HydroThermalVentsLine hydroThermalVentsLine) {
-    if (hydroThermalVentsLine.y1() < hydroThermalVentsLine.y2()) {
-      IntStream.rangeClosed(hydroThermalVentsLine.y1(), hydroThermalVentsLine.y2())
-          .forEach(y -> hydrothermalVentsMap[y][hydroThermalVentsLine.x1()] += 1);
+  private void drawHorizontalLine(Line hydroThermalVentsLine) {
+    if (hydroThermalVentsLine.getStartY() < hydroThermalVentsLine.getEndY()) {
+      IntStream.rangeClosed(hydroThermalVentsLine.getStartY(), hydroThermalVentsLine.getEndY())
+          .forEach(y -> hydrothermalVentsMap[y][hydroThermalVentsLine.getStartX()] += 1);
     } else {
-      IntStream.rangeClosed(hydroThermalVentsLine.y2(), hydroThermalVentsLine.y1())
-          .forEach(y -> hydrothermalVentsMap[y][hydroThermalVentsLine.x1()] += 1);
+      IntStream.rangeClosed(hydroThermalVentsLine.getEndY(), hydroThermalVentsLine.getStartY())
+          .forEach(y -> hydrothermalVentsMap[y][hydroThermalVentsLine.getStartX()] += 1);
     }
   }
 
-  private void drawDiagonalLine(HydroThermalVentsLine hydroThermalVentsLine) {
-    if (hydroThermalVentsLine.x1() < hydroThermalVentsLine.x2()) {
+  private void drawDiagonalLine(Line hydroThermalVentsLine) {
+    if (hydroThermalVentsLine.getStartX() < hydroThermalVentsLine.getEndX()) {
       drawDiagonalLeftToRight(hydroThermalVentsLine);
     } else {
       drawDiagonalRightToLeft(hydroThermalVentsLine);
     }
   }
 
-  private void drawDiagonalLeftToRight(HydroThermalVentsLine hydroThermalVentsLine) {
-    int steps = hydroThermalVentsLine.x2() - hydroThermalVentsLine.x1();
-    if (hydroThermalVentsLine.y1() < hydroThermalVentsLine.y2()) {
+  private void drawDiagonalLeftToRight(Line hydroThermalVentsLine) {
+    int steps = hydroThermalVentsLine.getEndX() - hydroThermalVentsLine.getStartX();
+    if (hydroThermalVentsLine.getStartY() < hydroThermalVentsLine.getEndY()) {
       for (int i = 0; i <= steps; i++) {
-        hydrothermalVentsMap[hydroThermalVentsLine.y1() + i][hydroThermalVentsLine.x1() + i] += 1;
+        hydrothermalVentsMap[hydroThermalVentsLine.getStartY() + i][hydroThermalVentsLine.getStartX() + i] += 1;
       }
     } else {
       for (int i = 0; i <= steps; i++) {
-        hydrothermalVentsMap[hydroThermalVentsLine.y1() - i][hydroThermalVentsLine.x1() + i] += 1;
+        hydrothermalVentsMap[hydroThermalVentsLine.getStartY() - i][hydroThermalVentsLine.getStartX() + i] += 1;
       }
     }
   }
 
-  private void drawDiagonalRightToLeft(HydroThermalVentsLine hydroThermalVentsLine) {
-    int steps = hydroThermalVentsLine.x1() - hydroThermalVentsLine.x2();
-    if (hydroThermalVentsLine.y1() < hydroThermalVentsLine.y2()) {
+  private void drawDiagonalRightToLeft(Line hydroThermalVentsLine) {
+    int steps = hydroThermalVentsLine.getStartX() - hydroThermalVentsLine.getEndX();
+    if (hydroThermalVentsLine.getStartY() < hydroThermalVentsLine.getEndY()) {
       for (int i = 0; i <= steps; i++) {
-        hydrothermalVentsMap[hydroThermalVentsLine.y1() + i][hydroThermalVentsLine.x1() - i] += 1;
+        hydrothermalVentsMap[hydroThermalVentsLine.getStartY() + i][hydroThermalVentsLine.getStartX() - i] += 1;
       }
     } else {
       for (int i = 0; i <= steps; i++) {
-        hydrothermalVentsMap[hydroThermalVentsLine.y1() - i][hydroThermalVentsLine.x1() - i] += 1;
+        hydrothermalVentsMap[hydroThermalVentsLine.getStartY() - i][hydroThermalVentsLine.getStartX() - i] += 1;
       }
     }
   }
 
-  private int getMaxX(List<HydroThermalVentsLine> hydroThermalVentsLines) {
+  private int getMaxX(List<Line> hydroThermalVentsLines) {
     int maxX = 0;
-    for (HydroThermalVentsLine hydroThermalVentsLine : hydroThermalVentsLines) {
-      if (hydroThermalVentsLine.x1() > maxX) {
-        maxX = hydroThermalVentsLine.x1();
-      }
-      if (hydroThermalVentsLine.x2() > maxX) {
-        maxX = hydroThermalVentsLine.x2();
+    for (Line hydroThermalVentsLine : hydroThermalVentsLines) {
+      if (hydroThermalVentsLine.getMaxX() > maxX) {
+        maxX = hydroThermalVentsLine.getMaxX();
       }
     }
     return maxX;
   }
 
-  private int getMaxY(List<HydroThermalVentsLine> hydroThermalVentsLines) {
+  private int getMaxY(List<Line> hydroThermalVentsLines) {
     int maxY = 0;
-    for (HydroThermalVentsLine hydroThermalVentsLine : hydroThermalVentsLines) {
-      if (hydroThermalVentsLine.y1() > maxY) {
-        maxY = hydroThermalVentsLine.y1();
-      }
-      if (hydroThermalVentsLine.y2() > maxY) {
-        maxY = hydroThermalVentsLine.y2();
+    for (Line hydroThermalVentsLine : hydroThermalVentsLines) {
+      if (hydroThermalVentsLine.getMaxY() > maxY) {
+        maxY = hydroThermalVentsLine.getMaxY();
       }
     }
     return maxY;

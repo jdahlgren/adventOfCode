@@ -2,6 +2,8 @@ package se.johannesdahlgren.adventofcode2021;
 
 import java.util.Arrays;
 import java.util.List;
+import se.johannesdahlgren.util.Line;
+import se.johannesdahlgren.util.Point;
 
 public class Day5 {
 
@@ -28,16 +30,16 @@ public class Day5 {
   }
 
   private void setupCoords(List<String> lines) {
-    List<HydroThermalVentsLine> hydroThermalVentsLines = lines.stream()
+    List<Line> hydroThermalVentsLines = lines.stream()
         .map(line -> line.split(" -> "))
         .map(this::createLine)
         .toList();
     hydroThermalVentsMap = new HydroThermalVentsMap(hydroThermalVentsLines);
   }
 
-  private HydroThermalVentsLine createLine(String[] coords) {
+  private Line createLine(String[] coords) {
     List<Integer> from = Arrays.stream(coords[0].split(",")).map(Integer::parseInt).toList();
     List<Integer> to = Arrays.stream(coords[1].split(",")).map(Integer::parseInt).toList();
-    return new HydroThermalVentsLine(from.get(0), from.get(1), to.get(0), to.get(1));
+    return new Line(new Point(from.get(0), from.get(1)), new Point(to.get(0), to.get(1)));
   }
 }
