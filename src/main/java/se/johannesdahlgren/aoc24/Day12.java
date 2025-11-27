@@ -1,16 +1,24 @@
 package se.johannesdahlgren.aoc24;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import se.johannesdahlgren.util.Direction;
 import se.johannesdahlgren.util.Point;
 
 public class Day12 {
-  private List<List<Character>> grid = new ArrayList<>();
-  private Set<Point> visited = new HashSet<>();
-  private List<Plot> plots = new ArrayList<>();
 
-  record Plot(Set<Point> points, char letter, int area, int perimeter) {}
+  private final List<List<Character>> grid = new ArrayList<>();
+  private final Set<Point> visited = new HashSet<>();
+  private final List<Plot> plots = new ArrayList<>();
+
+  record Plot(Set<Point> points, char letter, int area, int perimeter) {
+
+  }
 
   public long solve() {
     readInput();
@@ -31,11 +39,10 @@ public class Day12 {
 
   private void readInput() {
     try {
-      Files.readAllLines(Path.of("src/main/resources/2024/day12")).forEach(line -> {
-        grid.add(line.chars()
-            .mapToObj(ch -> (char) ch)
-            .toList());
-      });
+      Files.readAllLines(Path.of("src/main/resources/2024/day12")).forEach(line ->
+          grid.add(line.chars()
+              .mapToObj(ch -> (char) ch)
+              .toList()));
     } catch (IOException e) {
       throw new RuntimeException("Error reading input file", e);
     }
@@ -64,10 +71,10 @@ public class Day12 {
     for (Point point : plot) {
       // Check all four sides of the current point
       Point[] neighbors = {
-          new Point(point.x() + 1, point.y()), // down
-          new Point(point.x() - 1, point.y()), // up
-          new Point(point.x(), point.y() + 1), // right
-          new Point(point.x(), point.y() - 1)  // left
+          point.nextPosition(Direction.DOWN),
+          point.nextPosition(Direction.UP),
+          point.nextPosition(Direction.RIGHT),
+          point.nextPosition(Direction.LEFT)
       };
 
       for (Point neighbor : neighbors) {
@@ -84,15 +91,21 @@ public class Day12 {
 
   private boolean isOutsideGrid(Point point) {
     return point.x() < 0 || point.x() >= grid.size() ||
-        point.y() < 0 || point.y() >= grid.get(0).size();
+        point.y() < 0 || point.y() >= grid.getFirst().size();
   }
 
   private void dfs(int row, int col, char letter, Set<Point> currentPlot) {
-    if (row < 0 || row >= grid.size() || col < 0 || col >= grid.get(0).size()) return;
+    if (row < 0 || row >= grid.size() || col < 0 || col >= grid.getFirst().size()) {
+      return;
+    }
 
     Point point = new Point(row, col);
-    if (visited.contains(point)) return;
-    if (grid.get(row).get(col) != letter) return;
+    if (visited.contains(point)) {
+      return;
+    }
+    if (grid.get(row).get(col) != letter) {
+      return;
+    }
 
     visited.add(point);
     currentPlot.add(point);

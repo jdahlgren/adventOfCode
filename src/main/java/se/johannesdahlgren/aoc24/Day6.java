@@ -6,32 +6,10 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import se.johannesdahlgren.util.Direction;
 import se.johannesdahlgren.util.Point;
 
 public class Day6 {
-  private enum Direction {
-    NORTH(0, -1),
-    EAST(1, 0),
-    SOUTH(0, 1),
-    WEST(-1, 0);
-
-    private final int dx;
-    private final int dy;
-
-    Direction(int dx, int dy) {
-      this.dx = dx;
-      this.dy = dy;
-    }
-
-    public Direction turnRight() {
-      return switch (this) {
-        case NORTH -> EAST;
-        case EAST -> SOUTH;
-        case SOUTH -> WEST;
-        case WEST -> NORTH;
-      };
-    }
-  }
 
   private record State(Point position, Direction direction) {}
 
@@ -71,7 +49,7 @@ public class Day6 {
   private SimulationResult simulateGuard(char[][] map, Point startPos) {
     Set<Point> visitedPositions = new HashSet<>();
     Set<State> visitedStates = new HashSet<>();
-    Direction currentDirection = Direction.NORTH;
+    Direction currentDirection = Direction.UP;
     Point currentPos = startPos;
     visitedPositions.add(currentPos);
 
@@ -81,17 +59,14 @@ public class Day6 {
         return new SimulationResult(visitedPositions, true);
       }
 
-      Point nextPos = new Point(
-          currentPos.x() + currentDirection.dx,
-          currentPos.y() + currentDirection.dy
-      );
+      Point nextPos = currentPos.nextPosition(currentDirection);
 
       if (!isInsideMap(nextPos, map)) {
         return new SimulationResult(visitedPositions, false);
       }
 
       if (isObstacle(nextPos, map)) {
-        currentDirection = currentDirection.turnRight();
+        currentDirection = currentDirection.turn90DegreesClockwise();
         continue;
       }
 

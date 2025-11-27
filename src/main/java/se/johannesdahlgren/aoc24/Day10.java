@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import se.johannesdahlgren.util.Direction;
 import se.johannesdahlgren.util.Point;
 
 public class Day10 {
-  private static final int[] DX = {0, 1, 0, -1}; // right, down, left, up
-  private static final int[] DY = {1, 0, -1, 0};
 
   private final int[][] heightMap;
   private final int rows;
@@ -77,13 +76,11 @@ public class Day10 {
 
     int currentValue = heightMap[current.x()][current.y()];
 
-    for (int i = 0; i < 4; i++) {
-      int newX = current.x() + DX[i];
-      int newY = current.y() + DY[i];
-      Point next = new Point(newX, newY);
+    for (Direction direction : Direction.NON_DIAGONAL_DIRECTIONS) {
+      Point next = current.nextPosition(direction);
 
-      if (isValid(newX, newY) && !currentPath.contains(next)) {
-        int nextValue = heightMap[newX][newY];
+      if (next.isInBounds(rows, cols) && !currentPath.contains(next)) {
+        int nextValue = heightMap[next.x()][next.y()];
         if (nextValue == currentValue + 1) {
           currentPath.add(next);
           findPaths(next, end, currentPath, allPaths);
@@ -91,10 +88,6 @@ public class Day10 {
         }
       }
     }
-  }
-
-  private boolean isValid(int x, int y) {
-    return x >= 0 && x < rows && y >= 0 && y < cols;
   }
 
   public static class Result {

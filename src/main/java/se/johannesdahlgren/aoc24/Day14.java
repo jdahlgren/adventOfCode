@@ -97,7 +97,7 @@ public class Day14 {
         // Check all adjacent positions (including diagonal)
         for (Robot other : robots) {
           if (visited.contains(other.position)) continue;
-          if (isAdjacent(pos, other.position)) {
+          if (pos.isAdjacent(other.position)) {
             queue.add(other.position);
           }
         }
@@ -114,12 +114,6 @@ public class Day14 {
     return largestCluster.map(cluster ->
         (double) cluster.size() / robots.size() >= 0.2
     ).orElse(false);
-  }
-
-  private static boolean isAdjacent(Point p1, Point p2) {
-    int dx = Math.abs(p1.x() - p2.x());
-    int dy = Math.abs(p1.y()- p2.y());
-    return dx <= 1 && dy <= 1;
   }
 
   private static void printRoom(List<Robot> robots) {

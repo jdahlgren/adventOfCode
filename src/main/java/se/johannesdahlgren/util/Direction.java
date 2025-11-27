@@ -1,6 +1,7 @@
 package se.johannesdahlgren.util;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Direction {
   UP("U"),
@@ -11,6 +12,8 @@ public enum Direction {
   UP_RIGHT("UR"),
   DOWN_LEFT("DL"),
   DOWN_RIGHT("DR");
+
+  public static final List<Direction> NON_DIAGONAL_DIRECTIONS = List.of(UP, DOWN, RIGHT, LEFT);
 
   private final String shortName;
 
@@ -23,5 +26,18 @@ public enum Direction {
         .filter(d -> d.shortName.equals(shortName))
         .findFirst()
         .orElseThrow(() -> new RuntimeException("Not a valid Direction"));
+  }
+
+  public Direction turn90DegreesClockwise() {
+    return switch (this) {
+      case UP -> RIGHT;
+      case RIGHT -> DOWN;
+      case DOWN -> LEFT;
+      case LEFT -> UP;
+      case UP_LEFT -> UP_RIGHT;
+      case UP_RIGHT -> DOWN_RIGHT;
+      case DOWN_RIGHT -> DOWN_LEFT;
+      case DOWN_LEFT -> UP_LEFT;
+    };
   }
 }
