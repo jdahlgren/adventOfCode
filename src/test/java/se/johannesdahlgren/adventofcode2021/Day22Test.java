@@ -1,8 +1,7 @@
 package se.johannesdahlgren.adventofcode2021;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.hamcrest.core.Is;
 import org.junit.jupiter.api.Test;
 
 class Day22Test {
@@ -11,27 +10,27 @@ class Day22Test {
   void part1Example1() {
     Day22 day22 = new Day22("day22Example1.txt");
     long numberIfCubesInOnState = day22.rebootInnerReactor(50);
-    assertThat(numberIfCubesInOnState, Is.is(39L));
+    assertThat(numberIfCubesInOnState).isEqualTo(39L);
   }
 
   @Test
   void part1Example2() {
     Day22 day22 = new Day22("day22Example2.txt");
     long numberIfCubesInOnState = day22.rebootInnerReactor(50);
-    assertThat(numberIfCubesInOnState, Is.is(590784L));
+    assertThat(numberIfCubesInOnState).isEqualTo(590784L);
   }
 
   @Test
   void part1() {
     Day22 day22 = new Day22("day22.txt");
     long numberIfCubesInOnState = day22.rebootInnerReactor(50);
-    assertThat(numberIfCubesInOnState, Is.is(546724L));
+    assertThat(numberIfCubesInOnState).isEqualTo(546724L);
   }
 
   @Test
   void part1Example3() {
     Day22 day22 = new Day22("day22Example3.txt");
     long numberIfCubesInOnState = day22.rebootInnerReactor(50);
-    assertThat(numberIfCubesInOnState, Is.is(474140L));
+    assertThat(numberIfCubesInOnState).isEqualTo(474140L);
   }
 }

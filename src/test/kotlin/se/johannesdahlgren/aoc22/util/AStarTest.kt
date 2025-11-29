@@ -1,7 +1,6 @@
 package se.johannesdahlgren.aoc22.util
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.Is
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class AStarTest {
@@ -71,7 +70,7 @@ class AStarTest {
         val start = aStar.getNode(start)
         val goal = aStar.getNode(goal)
         val distance = aStar.search(start, goal)
-        assertThat(distance.size, Is.`is`(7))
+        assertThat(distance.size).isEqualTo(7)
     }
 
     @Test
@@ -80,7 +79,7 @@ class AStarTest {
         val start = aStar.getNode(start)
         val goal = aStar.getNode(goal)
         val distance = aStar.search(start, goal)
-        assertThat(distance.size, Is.`is`(13))
+        assertThat(distance.size).isEqualTo(13)
     }
 
     @Test
@@ -89,7 +88,7 @@ class AStarTest {
         val start = aStar.getNode(start)
         val goal = aStar.getNode(goal)
         val distance = aStar.search(start, goal)
-        assertThat(distance.size, Is.`is`(9))
+        assertThat(distance.size).isEqualTo(9)
     }
 
     @Test
@@ -98,7 +97,7 @@ class AStarTest {
         val start = aStar.getNode(start)
         val goal = aStar.getNode(goal)
         val distance = aStar.search(start, goal)
-        assertThat(distance.size, Is.`is`(15))
+        assertThat(distance.size).isEqualTo(15)
     }
 
     @Test
@@ -107,7 +106,7 @@ class AStarTest {
         val start = aStar.getNode(start)
         val goal = aStar.getNode(goal)
         val distance = aStar.search(start, goal)
-        assertThat(distance.size, Is.`is`(25))
+        assertThat(distance.size).isEqualTo(25)
     }
 
     @Test
@@ -117,7 +116,7 @@ class AStarTest {
         val goal = aStar.getNode(goal)
         val distance = aStar.search(start, goal)
         println(distance)
-        assertThat(distance.size, Is.`is`(20))
+        assertThat(distance.size).isEqualTo(20)
     }
 
     @Test
@@ -127,6 +126,6 @@ class AStarTest {
         val goal = aStar.getNode(goal)
         val distance = aStar.search(start, goal)
         println(distance)
-        assertThat(distance.size, Is.`is`(20))
+        assertThat(distance.size).isEqualTo(20)
     }
 }

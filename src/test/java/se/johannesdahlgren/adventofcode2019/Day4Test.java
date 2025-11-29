@@ -1,19 +1,12 @@
 package se.johannesdahlgren.adventofcode2019;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.lessThan;
-import static org.hamcrest.Matchers.not;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.johannesdahlgren.adventofcode2019.matchers.AdjacentDigitsMatcher;
-import se.johannesdahlgren.adventofcode2019.matchers.NeverDecreasesMatcher;
+import se.johannesdahlgren.adventofcode2019.asserts.AdjacentDigitsAssert;
+import se.johannesdahlgren.adventofcode2019.asserts.NeverDecreasesAssert;
 
 class Day4Test {
 
@@ -29,35 +22,35 @@ class Day4Test {
   @Test
   void atLeastOnePassword() {
     List<Integer> passwords = day4.getPasswords();
-    assertThat(passwords, is(not(empty())));
+    assertThat(passwords).isNotEmpty();
   }
 
   @Test
   void exactly6Digits() {
     List<Integer> passwords = day4.getPasswords();
     for (Integer password : passwords) {
-      assertThat(String.valueOf(password).length(), is(6));
+      assertThat(String.valueOf(password).length()).isEqualTo(6);
     }
   }
 
   @Test
   void noPasswordsWhenRangeStartsLongerThan6() {
     List<Integer> passwords = new Day4(1111111, 1111113).getPasswords();
-    assertThat(passwords, is(empty()));
+    assertThat(passwords).isEmpty();
   }
 
   @Test
   void noPasswordsWhenRangeEndsShorterThan6() {
     List<Integer> passwords = new Day4(111, 113).getPasswords();
-    assertThat(passwords, is(empty()));
+    assertThat(passwords).isEmpty();
   }
 
   @Test
   void withinRange() {
     List<Integer> passwords = day4.getPasswords();
     for (Integer password : passwords) {
-      assertThat(password, greaterThan(minValue));
-      assertThat(password, lessThan(maxValue));
+      assertThat(password).isGreaterThan(minValue);
+      assertThat(password).isLessThan(maxValue);
     }
   }
 
@@ -65,7 +58,7 @@ class Day4Test {
   void atLeastTwoAdjacentDigits() {
     List<Integer> passwords = day4.getPasswords();
     for (Integer password : passwords) {
-      MatcherAssert.assertThat(password, AdjacentDigitsMatcher.containsAtLeastTwoAdjacentDigits());
+      AdjacentDigitsAssert.assertThat(password).containsAtLeastTwoAdjacentDigits();
     }
   }
 
@@ -73,36 +66,36 @@ class Day4Test {
   void neverDecreases() {
     List<Integer> passwords = day4.getPasswords();
     for (Integer password : passwords) {
-      MatcherAssert.assertThat(password, NeverDecreasesMatcher.digitsNeverDecreases());
+      NeverDecreasesAssert.assertThat(password).digitsNeverDecreases();
     }
   }
 
   @Test
   void howManyValidPasswords() {
     List<Integer> passwords = day4.getPasswords();
-    assertThat(passwords.size(), is(1019));
+    assertThat(passwords.size()).isEqualTo(1019);
   }
 
   @Test
   void example1() {
     int password = 111111;
-    MatcherAssert.assertThat(password, AdjacentDigitsMatcher.containsAtLeastTwoAdjacentDigits());
-    MatcherAssert.assertThat(password, NeverDecreasesMatcher.digitsNeverDecreases());
+
+    AdjacentDigitsAssert.assertThat(password).containsAtLeastTwoAdjacentDigits();
+    NeverDecreasesAssert.assertThat(password).digitsNeverDecreases();
   }
 
   @Test
   void example2() {
     int password = 223450;
-    MatcherAssert.assertThat(password, AdjacentDigitsMatcher.containsAtLeastTwoAdjacentDigits());
-    MatcherAssert.assertThat(password, Matchers.is(Matchers.not(NeverDecreasesMatcher.digitsNeverDecreases())));
+    AdjacentDigitsAssert.assertThat(password).containsAtLeastTwoAdjacentDigits();
+    NeverDecreasesAssert.assertThat(password).notDigitsNeverDecreases();
   }
 
   @Test
   void example3() {
     int password = 123789;
-    MatcherAssert
-        .assertThat(password, Matchers.is(Matchers.not(AdjacentDigitsMatcher.containsAtLeastTwoAdjacentDigits())));
-    MatcherAssert.assertThat(password, NeverDecreasesMatcher.digitsNeverDecreases());
+    AdjacentDigitsAssert.assertThat(password).notContainsAtLeastTwoAdjacentDigits();
+    NeverDecreasesAssert.assertThat(password).digitsNeverDecreases();
   }
 
 }

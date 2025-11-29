@@ -1,7 +1,6 @@
 package se.johannesdahlgren.aoc23;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ class Day6Test {
     long productOfWaysToBeatRecord = day6.getWaysToBeatRecord().stream()
         .reduce(1L, (a, b) -> a * b);
 
-    assertThat(productOfWaysToBeatRecord, is(288L));
+    assertThat(productOfWaysToBeatRecord).isEqualTo(288L);
   }
 
   @Test
@@ -33,7 +32,7 @@ class Day6Test {
     long productOfWaysToBeatRecord = day6.getWaysToBeatRecord().stream()
         .reduce(1L, (a, b) -> a * b);
 
-    assertThat(productOfWaysToBeatRecord, is(861300L));
+    assertThat(productOfWaysToBeatRecord).isEqualTo(861300L);
   }
 
   @Test
@@ -44,7 +43,7 @@ class Day6Test {
     long productOfWaysToBeatRecord = day6.getWaysToBeatRecord().stream()
         .reduce(1L, (a, b) -> a * b);
 
-    assertThat(productOfWaysToBeatRecord, is(71503L));
+    assertThat(productOfWaysToBeatRecord).isEqualTo(71503L);
   }
 
   @Test
@@ -55,7 +54,7 @@ class Day6Test {
     long productOfWaysToBeatRecord = day6.getWaysToBeatRecord().stream()
         .reduce(1L, (a, b) -> a * b);
 
-    assertThat(productOfWaysToBeatRecord, is(28101347L));
+    assertThat(productOfWaysToBeatRecord).isEqualTo(28101347L);
   }
 
 }

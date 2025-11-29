@@ -1,7 +1,6 @@
 package se.johannesdahlgren.adventofcode2019;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ class Day5Test {
   void part1() {
     day5 = new Day5("day5.txt", 1);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(10987514));
+    assertThat(integers).isEqualTo(10987514);
   }
 
   @Test
@@ -21,7 +20,7 @@ class Day5Test {
     int input = 9;
     day5 = new Day5("day5_example1.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(input));
+    assertThat(integers).isEqualTo(input);
   }
 
   @Test
@@ -29,7 +28,7 @@ class Day5Test {
     int input = 8;
     day5 = new Day5("day5_example2.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(1));
+    assertThat(integers).isEqualTo(1);
   }
 
   @Test
@@ -37,7 +36,7 @@ class Day5Test {
     int input = 9;
     day5 = new Day5("day5_example2.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(0));
+    assertThat(integers).isEqualTo(0);
   }
 
   @Test
@@ -45,7 +44,7 @@ class Day5Test {
     int input = 2;
     day5 = new Day5("day5_example3.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(1));
+    assertThat(integers).isEqualTo(1);
   }
 
   @Test
@@ -53,7 +52,7 @@ class Day5Test {
     int input = 9;
     day5 = new Day5("day5_example3.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(0));
+    assertThat(integers).isEqualTo(0);
   }
 
   @Test
@@ -61,7 +60,7 @@ class Day5Test {
     int input = 8;
     day5 = new Day5("day5_example4.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(1));
+    assertThat(integers).isEqualTo(1);
   }
 
   @Test
@@ -69,7 +68,7 @@ class Day5Test {
     int input = 9;
     day5 = new Day5("day5_example4.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(0));
+    assertThat(integers).isEqualTo(0);
   }
 
   @Test
@@ -77,7 +76,7 @@ class Day5Test {
     int input = 2;
     day5 = new Day5("day5_example5.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(1));
+    assertThat(integers).isEqualTo(1);
   }
 
   @Test
@@ -85,7 +84,7 @@ class Day5Test {
     int input = 9;
     day5 = new Day5("day5_example5.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(0));
+    assertThat(integers).isEqualTo(0);
   }
 
   @Test
@@ -93,7 +92,7 @@ class Day5Test {
     int input = 0;
     day5 = new Day5("day5_example6.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(0));
+    assertThat(integers).isEqualTo(0);
   }
 
   @Test
@@ -101,7 +100,7 @@ class Day5Test {
     int input = 2;
     day5 = new Day5("day5_example6.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(1));
+    assertThat(integers).isEqualTo(1);
   }
 
   @Test
@@ -109,7 +108,7 @@ class Day5Test {
     int input = 0;
     day5 = new Day5("day5_example7.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(0));
+    assertThat(integers).isEqualTo(0);
   }
 
   @Test
@@ -117,7 +116,7 @@ class Day5Test {
     int input = 9;
     day5 = new Day5("day5_example7.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(1));
+    assertThat(integers).isEqualTo(1);
   }
 
   @Test
@@ -125,7 +124,7 @@ class Day5Test {
     int input = 7;
     day5 = new Day5("day5_example8.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(999));
+    assertThat(integers).isEqualTo(999);
   }
 
   @Test
@@ -133,7 +132,7 @@ class Day5Test {
     int input = 8;
     day5 = new Day5("day5_example8.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(1000));
+    assertThat(integers).isEqualTo(1000);
   }
 
   @Test
@@ -141,7 +140,7 @@ class Day5Test {
     int input = 9;
     day5 = new Day5("day5_example8.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(1001));
+    assertThat(integers).isEqualTo(1001);
   }
 
   @Test
@@ -149,7 +148,7 @@ class Day5Test {
     int input = 5;
     day5 = new Day5("day5.txt", input);
     int integers = day5.runDiagnosticCode();
-    assertThat(integers, is(14195011));
+    assertThat(integers).isEqualTo(14195011);
   }
 
 }

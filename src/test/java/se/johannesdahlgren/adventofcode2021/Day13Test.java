@@ -1,8 +1,7 @@
 package se.johannesdahlgren.adventofcode2021;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.hamcrest.core.Is;
 import org.junit.jupiter.api.Test;
 
 class Day13Test {
@@ -11,14 +10,14 @@ class Day13Test {
   void part1Example() {
     Day13 day13 = new Day13("day13Example.txt");
     long dotsAfterFold = day13.foldOnce();
-    assertThat(dotsAfterFold, Is.is(17L));
+    assertThat(dotsAfterFold).isEqualTo(17L);
   }
 
   @Test
   void part1() {
     Day13 day13 = new Day13("day13.txt");
     long dotsAfterFold = day13.foldOnce();
-    assertThat(dotsAfterFold, Is.is(781L));
+    assertThat(dotsAfterFold).isEqualTo(781L);
   }
 
   @Test
@@ -32,7 +31,7 @@ class Day13Test {
         #   #
         #####
         """;
-    assertThat(code, Is.is(expectedNumber));
+    assertThat(code).isEqualTo(expectedNumber);
   }
 
   @Test
@@ -47,6 +46,6 @@ class Day13Test {
         #    #    # #  #  # #  # #  # #    #  #
         #    #### #  #  ##   ###  ##  #    ###\s
         """;
-    assertThat(code, Is.is(expectedNumber));
+    assertThat(code).isEqualTo(expectedNumber);
   }
 }

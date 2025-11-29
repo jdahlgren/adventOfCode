@@ -1,20 +1,19 @@
 package se.johannesdahlgren.aoc22
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.Is
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class Day10Test {
     @Test
     fun part1Example() {
         val day10 = Day10("day10Example")
-        assertThat(day10.getSignalStrength(), Is.`is`(13140))
+        assertThat(day10.getSignalStrength()).isEqualTo(13140)
     }
 
     @Test
     fun part1() {
         val day10 = Day10("day10")
-        assertThat(day10.getSignalStrength(), Is.`is`(17380))
+        assertThat(day10.getSignalStrength()).isEqualTo(17380)
     }
 
     @Test
@@ -28,7 +27,7 @@ class Day10Test {
             ######......######......######......####
             #######.......#######.......#######.....
         """.trimIndent()
-        assertThat(day10.drawCRTScreen(), Is.`is`(expectedResult))
+        assertThat(day10.drawCRTScreen()).isEqualTo(expectedResult)
     }
 
     @Test
@@ -42,6 +41,6 @@ class Day10Test {
             #....#..#.#..#.#..#.#....#.#..#....#..#.
             #.....###..##...##..####.#..#.####..##..
         """.trimIndent()
-        assertThat(day10.drawCRTScreen(), Is.`is`(expectedResult))
+        assertThat(day10.drawCRTScreen()).isEqualTo(expectedResult)
     }
 }

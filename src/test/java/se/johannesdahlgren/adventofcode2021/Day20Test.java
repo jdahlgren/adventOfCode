@@ -1,8 +1,7 @@
 package se.johannesdahlgren.adventofcode2021;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.hamcrest.core.Is;
 import org.junit.jupiter.api.Test;
 
 class Day20Test {
@@ -11,28 +10,28 @@ class Day20Test {
   void part1Example() {
     Day20 day20 = new Day20("day20Example.txt");
     long litPixels = day20.enhanceTrenchMap(2);
-    assertThat(litPixels, Is.is(35L));
+    assertThat(litPixels).isEqualTo(35L);
   }
 
   @Test
   void part1() {
     Day20 day20 = new Day20("day20.txt");
     long litPixels = day20.enhanceTrenchMap(2);
-    assertThat(litPixels, Is.is(5395L));
+    assertThat(litPixels).isEqualTo(5395L);
   }
 
   @Test
   void part2Example() {
     Day20 day20 = new Day20("day20Example.txt");
     long litPixels = day20.enhanceTrenchMap(50);
-    assertThat(litPixels, Is.is(3351L));
+    assertThat(litPixels).isEqualTo(3351L);
   }
 
   @Test
   void part2() {
     Day20 day20 = new Day20("day20.txt");
     long litPixels = day20.enhanceTrenchMap(50);
-    assertThat(litPixels, Is.is(17584L));
+    assertThat(litPixels).isEqualTo(17584L);
   }
 
 }
