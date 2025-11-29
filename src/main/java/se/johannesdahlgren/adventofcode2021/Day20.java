@@ -10,7 +10,7 @@ public class Day20 {
 
   public Day20(String inputFileName) {
     List<String> lines = FileUtil.readFileToStringList(inputFileName);
-    algorithm = lines.get(0);
+    algorithm = lines.getFirst();
     inputImage = FileUtil.linesToString2DArray(lines.subList(2, lines.size()));
   }
 
@@ -27,16 +27,7 @@ public class Day20 {
       char[][] nextMap = new char[infiniteMap[0].length][infiniteMap.length];
       for (int i = 0; i < infiniteMap[0].length; i++) {
         for (int j = 0; j < infiniteMap.length; j++) {
-          String above =
-              "" + getPixelOrDefault(infiniteMap, i - 1, j - 1) + getPixelOrDefault(infiniteMap, i - 1, j) + getPixelOrDefault(infiniteMap, i - 1,
-                  j + 1);
-          String mid =
-              "" + getPixelOrDefault(infiniteMap, i, j - 1) + getPixelOrDefault(infiniteMap, i, j) + getPixelOrDefault(infiniteMap, i, j + 1);
-          String below =
-              "" + getPixelOrDefault(infiniteMap, i + 1, j - 1) + getPixelOrDefault(infiniteMap, i + 1, j) + getPixelOrDefault(infiniteMap, i + 1,
-                  j + 1);
-          String pixelString = above + mid + below;
-          String binaryString = pixelString.replace('.', '0').replace('#', '1');
+          String binaryString = getString(infiniteMap, i, j);
           int decimalNumber = Integer.parseInt(binaryString, 2);
           char newPixel = algorithm.charAt(decimalNumber);
           nextMap[i][j] = newPixel;
@@ -55,6 +46,20 @@ public class Day20 {
       }
     }
     return litPixels;
+  }
+
+  private String getString(char[][] infiniteMap, int i, int j) {
+    String above = "" + getPixelOrDefault(infiniteMap, i - 1, j - 1)
+        + getPixelOrDefault(infiniteMap, i - 1, j)
+        + getPixelOrDefault(infiniteMap, i - 1, j + 1);
+    String mid = "" + getPixelOrDefault(infiniteMap, i, j - 1)
+        + getPixelOrDefault(infiniteMap, i, j)
+        + getPixelOrDefault(infiniteMap, i, j + 1);
+    String below = "" + getPixelOrDefault(infiniteMap, i + 1, j - 1)
+        + getPixelOrDefault(infiniteMap, i + 1, j)
+        + getPixelOrDefault(infiniteMap, i + 1, j + 1);
+    String pixelString = above + mid + below;
+    return pixelString.replace('.', '0').replace('#', '1');
   }
 
   private char getPixelOrDefault(char[][] currentMap, int i, int j) {

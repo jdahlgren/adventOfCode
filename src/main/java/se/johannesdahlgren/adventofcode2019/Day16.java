@@ -12,7 +12,7 @@ public class Day16 {
     if (phases == 0) {
       return input.substring(0, 8);
     }
-    List<Integer> inputList = input.chars().boxed().map(Character::getNumericValue).collect(Collectors.toList());
+    List<Integer> inputList = input.chars().boxed().map(Character::getNumericValue).toList();
 
     StringBuilder output = new StringBuilder();
     for (int outputIndex = 0; outputIndex < inputList.size(); outputIndex++) {

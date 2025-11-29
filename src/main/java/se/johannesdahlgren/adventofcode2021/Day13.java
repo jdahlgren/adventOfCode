@@ -22,7 +22,7 @@ public class Day13 {
   }
 
   public long foldOnce() {
-    String firstInstruction = instructions.get(0);
+    String firstInstruction = instructions.getFirst();
     doAFold(firstInstruction);
     return randomDots.size();
   }

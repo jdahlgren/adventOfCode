@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Day12 {
 
-  Map<String, List<String>> caveMap = new HashMap<>();
+  private final Map<String, List<String>> caveMap = new HashMap<>();
 
   public Day12(String inputFileName) {
     List<String> caveMapList = FileUtil.readFileToStringList(inputFileName);

@@ -2,7 +2,6 @@ package se.johannesdahlgren.aoc24;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 public class Day7Test {

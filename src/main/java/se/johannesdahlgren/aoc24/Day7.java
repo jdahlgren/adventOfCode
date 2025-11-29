@@ -20,7 +20,7 @@ public class Day7 {
         String[] numbers = parts[1].trim().split("\\s+");
 
         if (includeConcatenation) {
-          if (canReachTargetThreeOps(numbers, targetValue, 0, Long.parseLong(numbers[0]), String.valueOf(numbers[0]))) {
+          if (canReachTargetThreeOps(numbers, targetValue, 0, Long.parseLong(numbers[0]), numbers[0])) {
             sum += targetValue;
           }
         } else {

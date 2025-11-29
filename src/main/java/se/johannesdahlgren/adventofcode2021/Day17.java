@@ -39,8 +39,6 @@ public class Day17 {
         }
         if (hitTarget && probe.yMax > probeYMax) {
           probeYMax = probe.yMax;
-//          System.out.printf("Initial velocity: %s,%s", i, j);
-//          System.out.println();
         }
       }
     }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Day9 {
-  private static final int BLANK_SPACE = -1; // Using -1 to represent blank space
+  private static final int BLANK_SPACE = -1; // Using -1 to represent a blank space
   private final List<Integer> initialSequence;
 
   public Day9() throws IOException {

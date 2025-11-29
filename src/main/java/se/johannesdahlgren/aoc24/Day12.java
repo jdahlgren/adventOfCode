@@ -78,7 +78,7 @@ public class Day12 {
       };
 
       for (Point neighbor : neighbors) {
-        // A side adds to perimeter if either:
+        // A side adds to the perimeter if either:
         // 1. It's outside the grid bounds
         // 2. The neighbor point is not part of the same plot
         if (isOutsideGrid(neighbor) || !plot.contains(neighbor)) {

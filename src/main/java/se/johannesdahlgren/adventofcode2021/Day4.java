@@ -13,7 +13,7 @@ public class Day4 {
 
   public Day4(String input) {
     List<String> lines = FileUtil.readFileToStringList(input);
-    List<Integer> drawnNumbers = Arrays.stream(lines.get(0).split(","))
+    List<Integer> drawnNumbers = Arrays.stream(lines.getFirst().split(","))
         .map(Integer::valueOf)
         .toList();
     List<BingoBoard> bingoBoards = setupBingoBoards(lines);

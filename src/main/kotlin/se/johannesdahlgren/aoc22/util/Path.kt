@@ -12,8 +12,4 @@ data class Path(val lines: List<Line>) {
     fun getMinX(): Int {
         return lines.minOf { it.getMinX() }
     }
-
-    fun getMinY(): Int {
-        return lines.minOf { it.getMinY() }
-    }
 }

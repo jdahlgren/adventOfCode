@@ -51,7 +51,7 @@ public class Day3 {
     Direction direction = Direction.fromShortName(step.substring(0, 1));
     int amount = Integer.parseInt(step.substring(1));
     for (int i = 0; i < amount; i++) {
-      Point lastPoint = line.get(line.size() - 1);
+      Point lastPoint = line.getLast();
       Point nextPoint = lastPoint.nextPosition(direction);
       line.add(nextPoint);
     }

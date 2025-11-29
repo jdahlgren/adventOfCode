@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PermutePhaseSettings {
 
-  private List<List<Integer>> allPhaseSettings = new ArrayList<>();
+  private final List<List<Integer>> allPhaseSettings = new ArrayList<>();
 
   public List<List<Integer>> permute(List<Integer> input) {
     calculateAllPermutations(input.size(), input);

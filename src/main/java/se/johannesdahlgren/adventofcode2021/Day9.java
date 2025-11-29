@@ -55,7 +55,7 @@ public class Day9 {
 
       }
     }
-    return basins.values().stream().sorted().skip(basins.values().size() - 3).reduce((a, b) -> a * b).orElse(0);
+    return basins.values().stream().sorted().skip(basins.size() - 3).reduce((a, b) -> a * b).orElse(0);
   }
 
   private int getBasinSize(int currentColumn, int currentRow, Set<Point> visitedPoints) {
@@ -64,7 +64,7 @@ public class Day9 {
         .filter(entry -> entry.getValue() != 9)
         .filter(entry -> !visitedPoints.contains(entry.getKey()))
         .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
-    if (basinNeighbors.size() != 0) {
+    if (!basinNeighbors.isEmpty()) {
       for (Point point : basinNeighbors.keySet()) {
         visitedPoints.add(point);
         getBasinSize(point.x(), point.y(), visitedPoints);

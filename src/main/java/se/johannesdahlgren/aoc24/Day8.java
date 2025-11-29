@@ -42,7 +42,7 @@ public class Day8 {
           Point p1 = sameNodes.get(i);
           Point p2 = sameNodes.get(j);
 
-          // Calculate direction vector between points
+          // Calculate a direction vector between points
           int dx = p2.x() - p1.x();
           int dy = p2.y() - p1.y();
 
@@ -60,25 +60,19 @@ public class Day8 {
             int x = p1.x();
             int y = p1.y();
             checkAndAddAntinode(x, y, allPossibleAntinodes); // Include the first node position
-            while (true) {
+            do {
               x -= unitDx;
               y -= unitDy;
-              if (!checkAndAddAntinode(x, y, allPossibleAntinodes)) {
-                break;
-              }
-            }
+            } while (checkAndAddAntinode(x, y, allPossibleAntinodes));
 
             // Check positions after p2
             x = p2.x();
             y = p2.y();
             checkAndAddAntinode(x, y, allPossibleAntinodes); // Include the second node position
-            while (true) {
+            do {
               x += unitDx;
               y += unitDy;
-              if (!checkAndAddAntinode(x, y, allPossibleAntinodes)) {
-                break;
-              }
-            }
+            } while (checkAndAddAntinode(x, y, allPossibleAntinodes));
 
             // Check positions between p1 and p2
             x = p1.x() + unitDx;

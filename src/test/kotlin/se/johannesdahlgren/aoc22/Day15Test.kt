@@ -1,4 +1,4 @@
-package se.johannesdahlgren.aoc22.util
+package se.johannesdahlgren.aoc22
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

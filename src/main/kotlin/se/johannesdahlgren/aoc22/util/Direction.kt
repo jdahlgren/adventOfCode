@@ -5,7 +5,7 @@ enum class Direction(val short: String) {
 
     companion object {
         fun fromString(value: String): Direction {
-            return Direction.values().first { value == it.short }
+            return entries.first { value == it.short }
         }
     }
 }

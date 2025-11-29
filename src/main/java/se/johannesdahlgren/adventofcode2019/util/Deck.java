@@ -25,7 +25,7 @@ public class Deck {
     }
 
     List<Integer> cut = deck.stream().mapToInt(Integer::intValue).limit(numberOfCardsToCut).boxed()
-        .collect(Collectors.toList());
+        .toList();
     List<Integer> newDeck = deck.stream().mapToInt(Integer::intValue).skip(numberOfCardsToCut).boxed()
         .collect(Collectors.toList());
     newDeck.addAll(cut);

@@ -7,15 +7,13 @@ import java.util.*;
 
 public class Day13 {
   static class Position {
-    int x, y;
-    int tokens;
-    String path;
+    private final int x, y;
+    private final int tokens;
 
-    Position(int x, int y, int tokens, String path) {
+    Position(int x, int y, int tokens) {
       this.x = x;
       this.y = y;
       this.tokens = tokens;
-      this.path = path;
     }
 
     @Override
@@ -33,7 +31,7 @@ public class Day13 {
   }
 
   static class Button {
-    int dx, dy;
+    private final int dx, dy;
 
     Button(int dx, int dy) {
       this.dx = dx;
@@ -86,7 +84,7 @@ public class Day13 {
     Queue<Position> queue = new LinkedList<>();
     Set<Position> visited = new HashSet<>();
 
-    Position start = new Position(0, 0, 0, "");
+    Position start = new Position(0, 0, 0);
     queue.add(start);
     visited.add(start);
 
@@ -100,15 +98,13 @@ public class Day13 {
       Position afterA = new Position(
           current.x + buttonA.dx,
           current.y + buttonA.dy,
-          current.tokens + 3,
-          ""
+          current.tokens + 3
       );
 
       Position afterB = new Position(
           current.x + buttonB.dx,
           current.y + buttonB.dy,
-          current.tokens + 1,
-          ""
+          current.tokens + 1
       );
 
       if (!visited.contains(afterA) && isReasonablePosition(afterA, targetX, targetY)) {

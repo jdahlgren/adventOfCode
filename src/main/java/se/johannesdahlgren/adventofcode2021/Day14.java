@@ -11,7 +11,7 @@ public class Day14 {
 
   public Day14(String inputFile) {
     List<String> fileOutput = FileUtil.readFileToStringList(inputFile);
-    polymerTemplate = fileOutput.get(0);
+    polymerTemplate = fileOutput.getFirst();
     for (String line : fileOutput) {
       if (line.contains("->")) {
         String[] split = line.split(" -> ");

@@ -9,14 +9,14 @@ import java.util.stream.IntStream;
 public class Day21 {
 
 
-  List<Player> players = new ArrayList<>();
+  private final List<Player> players = new ArrayList<>();
 
   public Day21(String input) {
     Pattern pattern = Pattern.compile("position: (\\d+)");
     Matcher matcher = pattern.matcher(input);
     while (matcher.find()) {
       int startPos = Integer.parseInt(matcher.group(1));
-      players.add(new Player(0, startPos));
+      players.add(new Player(startPos));
     }
   }
 
@@ -42,8 +42,8 @@ public class Day21 {
     private int score;
     private int pos;
 
-    Player(int score, int pos) {
-      this.score = score;
+    Player(int pos) {
+      this.score = 0;
       this.pos = pos;
     }
 

@@ -36,7 +36,7 @@ public final class BingoBoard {
   }
 
   private boolean checkColumnBingo() {
-    for (int i = 0; i < bingoNumberGrid.get(0).size(); i++) {
+    for (int i = 0; i < bingoNumberGrid.getFirst().size(); i++) {
       int numberOfMarkedInColumn = 0;
       for (List<BingoNumber> bingoNumberRow : bingoNumberGrid) {
         if (bingoNumberRow.get(i).isMarked()) {

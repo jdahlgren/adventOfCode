@@ -6,7 +6,7 @@ import se.johannesdahlgren.adventofcode2019.util.IntCodeComputer;
 
 public class Day5 {
 
-  private IntCodeComputer intCodeComputer;
+  private final IntCodeComputer intCodeComputer;
 
   public Day5(String filePath, int input) {
     intCodeComputer = new IntCodeComputer(FileToListUtil.getIntCode(filePath), List.of(input));

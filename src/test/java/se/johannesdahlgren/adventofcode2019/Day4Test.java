@@ -11,8 +11,8 @@ import se.johannesdahlgren.adventofcode2019.asserts.NeverDecreasesAssert;
 class Day4Test {
 
   private Day4 day4;
-  private int minValue = 248345;
-  private int maxValue = 746315;
+  private final int minValue = 248345;
+  private final int maxValue = 746315;
 
   @BeforeEach
   void setUp() {

@@ -1,5 +1,7 @@
-package se.johannesdahlgren.aoc22.util
+package se.johannesdahlgren.aoc22
 
+import se.johannesdahlgren.aoc22.util.FileReader
+import se.johannesdahlgren.aoc22.util.Pos
 import kotlin.math.abs
 
 class Day15(private val fileName: String) {

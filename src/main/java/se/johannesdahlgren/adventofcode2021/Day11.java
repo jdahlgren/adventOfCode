@@ -12,7 +12,7 @@ public class Day11 {
     int[][] octopusEnergyLevel = FileUtil.readFileToInteger2DArray(inputFileName);
     for (int i = 0; i < octopusEnergyLevel.length; i++) {
       for (int j = 0; j < octopusEnergyLevel[0].length; j++) {
-        octopuses.add(new Octopus(i, j, octopusEnergyLevel[i][j], false));
+        octopuses.add(new Octopus(i, j, octopusEnergyLevel[i][j]));
       }
     }
   }
@@ -107,11 +107,11 @@ public class Day11 {
     private int energy;
     private boolean hasFlashed;
 
-    private Octopus(int x, int y, int energy, boolean hasFlashed) {
+    private Octopus(int x, int y, int energy) {
       this.x = x;
       this.y = y;
       this.energy = energy;
-      this.hasFlashed = hasFlashed;
+      this.hasFlashed = false;
     }
 
     public boolean willFlash() {

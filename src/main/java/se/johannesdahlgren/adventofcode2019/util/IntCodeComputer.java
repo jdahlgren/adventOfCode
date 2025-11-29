@@ -25,7 +25,7 @@ public class IntCodeComputer {
   private final List<Integer> defaultIntCode;
   private List<Integer> currentIntCode;
   private int currentIndex;
-  private LinkedList<Integer> inputList;
+  private final LinkedList<Integer> inputList;
   private int output;
 
   public IntCodeComputer(List<Integer> intCode) {

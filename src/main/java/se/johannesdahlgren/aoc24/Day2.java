@@ -12,22 +12,22 @@ public class Day2 {
   private static final String FILE_PATH = "src/main/resources/2024/day2";
 
   public int part1() throws IOException {
-    return countValidLinesPart1(FILE_PATH);
+    return countValidLinesPart1();
   }
 
   public int part2() throws IOException {
-    return countValidLinesPart2(FILE_PATH);
+    return countValidLinesPart2();
   }
 
-  private int countValidLinesPart1(String filePath) throws IOException {
-    return Files.readAllLines(Path.of(filePath)).stream()
+  private int countValidLinesPart1() throws IOException {
+    return Files.readAllLines(Path.of(FILE_PATH)).stream()
         .map(this::parseNumbers)
         .mapToInt(this::isValidSequencePart1)
         .sum();
   }
 
-  private int countValidLinesPart2(String filePath) throws IOException {
-    return Files.readAllLines(Path.of(filePath)).stream()
+  private int countValidLinesPart2() throws IOException {
+    return Files.readAllLines(Path.of(FILE_PATH)).stream()
         .map(this::parseNumbers)
         .mapToInt(this::canBeValid)
         .sum();
@@ -73,7 +73,7 @@ public class Day2 {
     for (int i = 1; i < numbers.size(); i++) {
       int difference = numbers.get(i) - numbers.get(i - 1);
 
-      // Check if sequence breaks the rules
+      // Check if the sequence breaks the rules
       if ((difference <= 0 || difference > 3) &&
           (difference >= 0 || difference < -3)) {
         return false;

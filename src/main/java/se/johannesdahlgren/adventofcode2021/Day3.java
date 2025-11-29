@@ -14,7 +14,7 @@ public class Day3 {
 
   public int getPowerConsumption() {
     StringBuilder gammaRateBuilder = new StringBuilder();
-    for (int i = 0; i < diagnosticReport.get(0).size(); i++) {
+    for (int i = 0; i < diagnosticReport.getFirst().size(); i++) {
       int onCount = 0;
       for (List<Integer> ints : diagnosticReport) {
         if (ints.get(i) == 1) {
@@ -50,7 +50,7 @@ public class Day3 {
   private String calculateRating(Function< List<Integer>, Integer> bitCriteria) {
     List<List<Integer>> currentReport = diagnosticReport;
 
-    for (int i = 0; i < currentReport.get(0).size(); i++) {
+    for (int i = 0; i < currentReport.getFirst().size(); i++) {
       List<Integer> column = new ArrayList<>();
       for (List<Integer> row : currentReport) {
         column.add(row.get(i));
@@ -64,7 +64,7 @@ public class Day3 {
     }
 
     StringBuilder stringBuilder = new StringBuilder();
-    currentReport.get(0).forEach(stringBuilder::append);
+    currentReport.getFirst().forEach(stringBuilder::append);
     return stringBuilder.toString();
   }
 
