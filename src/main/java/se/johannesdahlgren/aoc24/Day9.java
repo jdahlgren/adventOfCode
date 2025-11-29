@@ -111,7 +111,7 @@ public class Day9 {
     for (int i = result.size() - 1; i >= 0; i--) {
       int number = result.get(i);
       if (number != BLANK_SPACE) {
-        numberPositions.computeIfAbsent(number, k -> new ArrayList<>()).add(i);
+        numberPositions.computeIfAbsent(number, _ -> new ArrayList<>()).add(i);
       }
     }
 

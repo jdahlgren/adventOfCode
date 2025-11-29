@@ -13,8 +13,8 @@ public class Day12 {
     List<String> caveMapList = FileUtil.readFileToStringList(inputFileName);
     for (String path : caveMapList) {
       String[] split = path.split("-");
-      caveMap.computeIfAbsent(split[0], s -> new ArrayList<>()).add(split[1]);
-      caveMap.computeIfAbsent(split[1], s -> new ArrayList<>()).add(split[0]);
+      caveMap.computeIfAbsent(split[0], _ -> new ArrayList<>()).add(split[1]);
+      caveMap.computeIfAbsent(split[1], _ -> new ArrayList<>()).add(split[0]);
     }
   }
 
