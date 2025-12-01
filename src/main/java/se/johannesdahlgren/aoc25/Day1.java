@@ -20,12 +20,33 @@ public class Day1 {
       String direction = line.substring(0, 1);
       int steps = Integer.parseInt(line.substring(1));
       if (direction.equals("R")) {
-        currentPosition = (currentPosition + steps) % lockDial.length;
+        currentPosition = Math.floorMod(currentPosition + steps, lockDial.length);
       } else {
-        currentPosition = (lockDial.length + currentPosition - steps) % lockDial.length;
+        currentPosition = Math.floorMod(currentPosition - steps, lockDial.length);
       }
       if (currentPosition == 0) {
         numberOfTimesAtZero++;
+      }
+    }
+    return numberOfTimesAtZero;
+  }
+
+  public int method0x434C49434B() {
+    for (String line : lines) {
+      String direction = line.substring(0, 1);
+      int steps = Integer.parseInt(line.substring(1));
+
+      if (direction.equals("R")) {
+        int nextPos = currentPosition + steps;
+        numberOfTimesAtZero += nextPos / lockDial.length;
+        currentPosition = Math.floorMod(nextPos, lockDial.length);
+      } else {
+        int nextPos = currentPosition - steps;
+        if (currentPosition != 0 && nextPos <= 0) {
+          numberOfTimesAtZero++;
+        }
+        numberOfTimesAtZero += Math.abs(nextPos) / lockDial.length;
+        currentPosition = Math.floorMod(nextPos, lockDial.length);
       }
     }
     return numberOfTimesAtZero;
