@@ -69,7 +69,7 @@ public class Day5 {
   }
 
   private Almanac toAlmanac(String input) {
-    String[] split = input.split("\\n\\n");
+    String[] split = input.replace("\r\n", "\n").split("\\n\\n");
     List<Long> seedNumbers = Arrays.stream(split[0]
             .substring(split[0].indexOf(":") + 1)
             .split(" "))
@@ -81,7 +81,7 @@ public class Day5 {
     List<AToBMap> aToBMapList = new ArrayList<>();
     for (int i = 1; i < split.length; i++) {
       List<AToB> aToBList = new ArrayList<>();
-      String[] subSplit = split[i].split("\\n");
+      String[] subSplit = split[i].replace("\r\n", "\n").split("\\n");
       for (int j = 1; j < subSplit.length; j++) {
         List<Long> aToBNumbers = Arrays.stream(subSplit[j].split(" "))
             .map(String::trim)

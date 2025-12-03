@@ -6,6 +6,7 @@ class FileReader {
         fun readFileAsStringSplitEmptyLine(fileName: String): List<String> {
             val filePath = "/2022/$fileName.txt"
             return FileReader::class.java.getResource(filePath)!!.readText()
+                .replace("\r\n", "\n")
                 .split("\n\n")
         }
 
