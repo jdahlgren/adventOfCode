@@ -25,6 +25,12 @@ public class FileUtil {
     }
   }
 
+  public static List<String> toStringFromCsv(Path path) {
+    return Stream.of(toString(path)
+            .split(","))
+        .toList();
+  }
+
   public static List<String> toLines(Path path) {
     try {
       return Files.readAllLines(path);
@@ -48,8 +54,7 @@ public class FileUtil {
   }
 
   public static List<Integer> toIntListFromCsv(Path path) {
-    return Stream.of(toString(path)
-            .split(","))
+    return toStringFromCsv(path).stream()
         .map(Integer::valueOf)
         .toList();
   }
