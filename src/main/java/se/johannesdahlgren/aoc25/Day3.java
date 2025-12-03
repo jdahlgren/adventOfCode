@@ -41,4 +41,31 @@ public class Day3 {
     }
     return totalOutputJoltage;
   }
+
+  public long totalOutputJoltageOverride() {
+    long totalOutputJoltage = 0;
+    for (String batteryBank : batteryBanks) {
+      StringBuilder sb = new StringBuilder();
+      int maxJoltageIndex = -1;
+
+      int batteriesToTurn = 12;
+      for (int i = 0; i < batteriesToTurn; i++) {
+        int maxJoltage = 0;
+        for (int j = maxJoltageIndex + 1; j < batteryBank.length() - batteriesToTurn + 1 + i; j++) {
+          int nextJoltage = Character.getNumericValue(batteryBank.charAt(j));
+          if (nextJoltage > maxJoltage) {
+            maxJoltage = nextJoltage;
+            maxJoltageIndex = j;
+            if (maxJoltage == 9) {
+              break;
+            }
+          }
+        }
+        sb.append(maxJoltage);
+      }
+
+      totalOutputJoltage += Long.parseLong(sb.toString());
+    }
+    return totalOutputJoltage;
+  }
 }
