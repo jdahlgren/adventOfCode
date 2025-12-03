@@ -12,43 +12,12 @@ public class Day3 {
     batteryBanks = FileUtil.toLines(FileUtil.getPath("2025", "day3." + fileName));
   }
 
-  public int totalOutputJoltage() {
-    int totalOutputJoltage = 0;
-    for (String batteryBank : batteryBanks) {
-      int maxJoltage = 0;
-      int maxJoltageIndex = -1;
-      for (int i = 0; i < batteryBank.length() - 1; i++) {
-        int nextJoltage = Character.getNumericValue(batteryBank.charAt(i));
-        if (nextJoltage > maxJoltage) {
-          maxJoltage = nextJoltage;
-          maxJoltageIndex = i;
-          if (maxJoltage == 9) {
-            break;
-          }
-        }
-      }
-      int secondMaxJoltage = 0;
-      for (int i = maxJoltageIndex + 1; i < batteryBank.length(); i++) {
-        int nextJoltage = Character.getNumericValue(batteryBank.charAt(i));
-        if (nextJoltage > secondMaxJoltage) {
-          secondMaxJoltage = nextJoltage;
-          if (secondMaxJoltage == 9) {
-            break;
-          }
-        }
-      }
-      totalOutputJoltage += Integer.parseInt("" + maxJoltage + secondMaxJoltage);
-    }
-    return totalOutputJoltage;
-  }
-
-  public long totalOutputJoltageOverride() {
+  public long totalOutputJoltage(int batteriesToTurn) {
     long totalOutputJoltage = 0;
     for (String batteryBank : batteryBanks) {
       StringBuilder sb = new StringBuilder();
       int maxJoltageIndex = -1;
 
-      int batteriesToTurn = 12;
       for (int i = 0; i < batteriesToTurn; i++) {
         int maxJoltage = 0;
         for (int j = maxJoltageIndex + 1; j < batteryBank.length() - batteriesToTurn + 1 + i; j++) {
