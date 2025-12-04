@@ -4,15 +4,16 @@ import se.johannesdahlgren.util.Direction;
 import se.johannesdahlgren.util.FileUtil;
 import se.johannesdahlgren.util.Point;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Day4 {
+class Day4 {
 
   private final static char ROLL = '@';
   private final PaperRollLocation[][] paperRollLocations;
 
   private record PaperRollLocation(char c, Point point) {
-    public int countAdjacentPaperRolls(PaperRollLocation[][] paperRollLocations) {
+    int countAdjacentPaperRolls(PaperRollLocation[][] paperRollLocations) {
       int adjacentPaperRolls = 0;
       for (Direction direction : Direction.values()) {
         Point nextPosition = point.nextPosition(direction);
@@ -28,7 +29,7 @@ public class Day4 {
     }
   }
 
-  public Day4(String fileName) {
+  Day4(String fileName) {
     List<List<Character>> paperMap = FileUtil.toChar2DList(FileUtil.getPath("2025", "day4." + fileName));
     paperRollLocations = new PaperRollLocation[paperMap.size()][paperMap.getFirst().size()];
     for (int i = 0; i < paperMap.size(); i++) {
@@ -38,18 +39,34 @@ public class Day4 {
     }
   }
 
-  public int numberOfAccessiblePaperRolls() {
-    int accessiblePaperRolls = 0;
+  List<PaperRollLocation> accessiblePaperRolls() {
+    List<PaperRollLocation> accessiblePaperRolls = new ArrayList<>();
     for (PaperRollLocation[] row : paperRollLocations) {
       for (PaperRollLocation paperRollLocation : row) {
         if (paperRollLocation.c() == ROLL) {
           int adjacentPaperRolls = paperRollLocation.countAdjacentPaperRolls(paperRollLocations);
           if (adjacentPaperRolls < 4) {
-            accessiblePaperRolls++;
+            accessiblePaperRolls.add(paperRollLocation);
           }
         }
       }
     }
     return accessiblePaperRolls;
+  }
+
+  int numberOfRemovablePaperRolls() {
+    int removablePaperRolls = 0;
+    do {
+      List<PaperRollLocation> accessiblePaperRolls = accessiblePaperRolls();
+      removePaperRolls(accessiblePaperRolls);
+      removablePaperRolls += accessiblePaperRolls.size();
+    } while (!accessiblePaperRolls().isEmpty());
+    return removablePaperRolls;
+  }
+
+  private void removePaperRolls(List<PaperRollLocation> accessiblePaperRolls) {
+    for (PaperRollLocation paperRollLocation : accessiblePaperRolls) {
+      paperRollLocations[paperRollLocation.point().x()][paperRollLocation.point().y()] = new PaperRollLocation('x', paperRollLocation.point());
+    }
   }
 }
