@@ -1,0 +1,55 @@
+package se.johannesdahlgren.aoc25;
+
+import se.johannesdahlgren.util.Direction;
+import se.johannesdahlgren.util.FileUtil;
+import se.johannesdahlgren.util.Point;
+
+import java.util.List;
+
+public class Day4 {
+
+  private final static char ROLL = '@';
+  private final PaperRollLocation[][] paperRollLocations;
+
+  private record PaperRollLocation(char c, Point point) {
+    public int countAdjacentPaperRolls(PaperRollLocation[][] paperRollLocations) {
+      int adjacentPaperRolls = 0;
+      for (Direction direction : Direction.values()) {
+        Point nextPosition = point.nextPosition(direction);
+        if (nextPosition.isInBounds(paperRollLocations.length, paperRollLocations[0].length)) {
+          char possiblePaperRoll = paperRollLocations[nextPosition.x()][nextPosition.y()].c();
+          if (possiblePaperRoll == ROLL) {
+            adjacentPaperRolls++;
+          }
+        }
+      }
+
+      return adjacentPaperRolls;
+    }
+  }
+
+  public Day4(String fileName) {
+    List<List<Character>> paperMap = FileUtil.toChar2DList(FileUtil.getPath("2025", "day4." + fileName));
+    paperRollLocations = new PaperRollLocation[paperMap.size()][paperMap.getFirst().size()];
+    for (int i = 0; i < paperMap.size(); i++) {
+      for (int j = 0; j < paperMap.get(i).size(); j++) {
+        paperRollLocations[i][j] = new PaperRollLocation(paperMap.get(i).get(j), new Point(i, j));
+      }
+    }
+  }
+
+  public int numberOfAccessiblePaperRolls() {
+    int accessiblePaperRolls = 0;
+    for (PaperRollLocation[] row : paperRollLocations) {
+      for (PaperRollLocation paperRollLocation : row) {
+        if (paperRollLocation.c() == ROLL) {
+          int adjacentPaperRolls = paperRollLocation.countAdjacentPaperRolls(paperRollLocations);
+          if (adjacentPaperRolls < 4) {
+            accessiblePaperRolls++;
+          }
+        }
+      }
+    }
+    return accessiblePaperRolls;
+  }
+}
