@@ -7,13 +7,17 @@ import java.util.List;
 
 public class Day5 {
 
-  private final List<String> freshRanges;
+  private final List<Range> freshIngredientIdRanges;
   private final List<Long> ingredientIds;
 
   public Day5(String fileName) {
     List<String> database = FileUtil.toLines(FileUtil.getPath("2025", "day5." + fileName));
     int splitIndex = database.indexOf("");
-    freshRanges = database.subList(0, splitIndex);
+    List<String> freshRanges = database.subList(0, splitIndex);
+    freshIngredientIdRanges = freshRanges.stream()
+        .map(r -> new Range(Long.parseLong(r.split("-")[0]), Long.parseLong(r.split("-")[1])))
+        .sorted()
+        .toList();
     ingredientIds = database.subList(splitIndex + 1, database.size()).stream()
         .map(Long::parseLong)
         .toList();
@@ -23,9 +27,10 @@ public class Day5 {
     int numberOfFreshIngredients = 0;
 
     for (Long ingredientId : ingredientIds) {
-      for (String freshRange : freshRanges) {
-        String[] split = freshRange.split("-");
-        if (Math.max(ingredientId, Long.parseLong(split[0])) == Math.min(ingredientId, Long.parseLong(split[1]))) {
+      for (Range freshIngredientIdRange : freshIngredientIdRanges) {
+        boolean ingredientIdWithinRange = Math.max(ingredientId, freshIngredientIdRange.start)
+            == Math.min(ingredientId, freshIngredientIdRange.end);
+        if (ingredientIdWithinRange) {
           numberOfFreshIngredients++;
           break;
         }
@@ -35,49 +40,46 @@ public class Day5 {
   }
 
   public long countAllFreshIds() {
-    List<Interval> uniqueRanges = new ArrayList<>();
-    List<Interval> freshIntervals = freshRanges.stream()
-        .map(r -> new Interval(Long.parseLong(r.split("-")[0]), Long.parseLong(r.split("-")[1])))
-        .sorted()
-        .toList();
-    for (Interval freshInterval : freshIntervals) {
+    List<Range> uniqueIngredientIdRanges = new ArrayList<>();
+
+    for (Range freshIngredientIdRange : freshIngredientIdRanges) {
 
       boolean isHandled = false;
-      for (Interval uniqueInterval : uniqueRanges) {
-        boolean freshStartWithinUniqueInterval = Math.max(freshInterval.start, uniqueInterval.start) == Math.min(freshInterval.start, uniqueInterval.end);
-        boolean freshEndWithinUniqueInterval = Math.max(freshInterval.end, uniqueInterval.start) == Math.min(freshInterval.end, uniqueInterval.end);
+      for (Range uniqueIngredientIdRange : uniqueIngredientIdRanges) {
+        boolean freshStartWithinUniqueInterval = Math.max(freshIngredientIdRange.start, uniqueIngredientIdRange.start)
+            == Math.min(freshIngredientIdRange.start, uniqueIngredientIdRange.end);
+        boolean freshEndWithinUniqueInterval = Math.max(freshIngredientIdRange.end, uniqueIngredientIdRange.start)
+            == Math.min(freshIngredientIdRange.end, uniqueIngredientIdRange.end);
 
         if (freshStartWithinUniqueInterval && freshEndWithinUniqueInterval) {
-          // fully within existing range, throw
           isHandled = true;
           break;
         } else if (freshStartWithinUniqueInterval) {
-          uniqueInterval.setEnd(freshInterval.end);
+          uniqueIngredientIdRange.setEnd(freshIngredientIdRange.end);
           isHandled = true;
           break;
         } else if (freshEndWithinUniqueInterval) {
-          uniqueInterval.setStart(freshInterval.start);
+          uniqueIngredientIdRange.setStart(freshIngredientIdRange.start);
           isHandled = true;
           break;
         }
       }
       if (!isHandled) {
-        uniqueRanges.add(freshInterval);
+        uniqueIngredientIdRanges.add(freshIngredientIdRange);
       }
     }
 
-    return uniqueRanges.stream()
-        .map(Interval::numberOfFreshIds)
+    return uniqueIngredientIdRanges.stream()
+        .map(Range::numberOfFreshIds)
         .reduce(Long::sum)
         .orElse(0L);
-
   }
 
-  private static final class Interval implements Comparable<Interval> {
+  private static final class Range implements Comparable<Range> {
     private Long start;
     private Long end;
 
-    private Interval(Long start, Long end) {
+    private Range(Long start, Long end) {
       this.start = start;
       this.end = end;
     }
@@ -95,10 +97,10 @@ public class Day5 {
     }
 
     @Override
-    public int compareTo(Interval otherInterval) {
-      int startCompare = this.start.compareTo(otherInterval.start);
+    public int compareTo(Range otherRange) {
+      int startCompare = this.start.compareTo(otherRange.start);
       if (startCompare == 0) {
-        return this.end.compareTo(otherInterval.end);
+        return this.end.compareTo(otherRange.end);
       }
       return startCompare;
     }
