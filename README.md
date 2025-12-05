@@ -2,7 +2,7 @@
 Collection of my solutions to Advent of Code
 Year 2019-2024 is merged into this repo from its respective repos, which are now archived.
 
-## 2025 - 8/24⭐
+## 2025 - 10/24⭐
 Back to my own solutions. No LLMs this year.
 
 ## 2024 - 26/50⭐
