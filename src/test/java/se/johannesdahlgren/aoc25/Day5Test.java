@@ -16,4 +16,16 @@ class Day5Test {
     Day5 day5 = new Day5("");
     assertThat(day5.numberOfFreshIngredients()).isEqualTo(868);
   }
+
+  @Test
+  void part2Example() {
+    Day5 day5 = new Day5("example");
+    assertThat(day5.countAllFreshIds()).isEqualTo(14L);
+  }
+
+  @Test
+  void part2() {
+    Day5 day5 = new Day5("");
+    assertThat(day5.countAllFreshIds()).isEqualTo(354143734113772L);
+  }
 }
