@@ -16,4 +16,16 @@ class Day6Test {
     Day6 day6 = new Day6("");
     assertThat(day6.grandTotal()).isEqualTo(4648618073226L);
   }
+
+  @Test
+  void part2Example() {
+    Day6 day6 = new Day6("example");
+    assertThat(day6.grandTotalCephalopodMath()).isEqualTo(3263827L);
+  }
+
+  @Test
+  void part2() {
+    Day6 day6 = new Day6("");
+    assertThat(day6.grandTotalCephalopodMath()).isEqualTo(7329921182115L);
+  }
 }
