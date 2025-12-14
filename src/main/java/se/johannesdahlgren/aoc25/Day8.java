@@ -40,6 +40,18 @@ public class Day8 {
         .reduce(1, (integer, integer2) -> integer * integer2);
   }
 
+  public int connectAll() {
+    List<BoxDistance> shortest = distances();
+    for (BoxDistance boxDistance : shortest) {
+      addToCircuit(boxDistance.a(), boxDistance.b());
+      mergeConnections();
+      if (circuits.stream().anyMatch(set -> set.size() == unconnectedJunctions.size())) {
+        return boxDistance.a().x() * boxDistance.b().x();
+      }
+    }
+    return -1;
+  }
+
   private void mergeConnections() {
     for (Set<Point3D> circuit : circuits) {
       for (Set<Point3D> circuit2 : circuits) {
